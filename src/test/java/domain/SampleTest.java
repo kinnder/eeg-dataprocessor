@@ -1,12 +1,15 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.jmock.Mockery;
 import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ExperimentTest {
+public class SampleTest {
 
 	private final Mockery context = new Mockery() {
 		{
@@ -43,5 +46,16 @@ public class ExperimentTest {
 		Assert.assertEquals(true, out.getHasTriggered());
 		Assert.assertEquals(2, out.getLabelId());
 		Assert.assertEquals(494, out.getTriggerTime());
+	}
+	
+	@Test
+	public void test() {
+		ArrayList<Integer> list = new ArrayList<>();
+		list.add(1);
+		list.add(2);
+		
+		Iterator<Integer> iterator = list.iterator();
+		iterator.next();
+		iterator.next();
 	}
 }
