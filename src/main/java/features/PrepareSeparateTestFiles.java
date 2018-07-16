@@ -48,14 +48,14 @@ public class PrepareSeparateTestFiles {
 					}
 //					long indicationId_begin = sample_current.getStartTime();
 					long indicationId_begin = sample_current.getStartTime() + 204;
-					long indicationId_end = indicationId_begin + 900;
+					long indicationId_end = indicationId_begin + 204 + 696;
 //					long indicationId_end = Long.MAX_VALUE;
 //					if (sample_next != null) {
 //						indicationId_end = sample_next.getStartTime();
 //					}
 
 					String testFileName = folderName + "//"
-							+ String.format("Tr%d_%d.txt", sampleId, sample_current.getLabelId());
+							+ String.format("Tr%04d_%02d.txt", sampleId, sample_current.getLabelId());
 					try (BufferedWriter testFile = new BufferedWriter(new FileWriter(testFileName))) {
 						String indicationAsString;
 						READING_INDICATIONS: while (true) {
