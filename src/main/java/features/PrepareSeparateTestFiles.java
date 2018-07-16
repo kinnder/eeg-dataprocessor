@@ -1,14 +1,13 @@
 package features;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 import domain.Sample;
+import utility.StringDataFileReader;
 
 /*
  * Заменить FileReader
@@ -29,40 +28,22 @@ public class PrepareSeparateTestFiles {
 			folder.mkdir();
 		}
 
-		try (BufferedReader samplesFile = new BufferedReader(new FileReader(samplesFileName))) {
-			try (BufferedReader indicationsFile = new BufferedReader(new FileReader(indicationsFileName))) {
+		try (StringDataFileReader samplesFile = new StringDataFileReader(samplesFileName)) {
+			try (StringDataFileReader indicationsFile = new StringDataFileReader(indicationsFileName)) {
 				long sampleId = 1;
 				long indicationId = 395570;
 
-				String sampleAsString;
-				if ((sampleAsString = samplesFile.readLine()) == null) {
-					System.out.println("no samples");
-					return;
-				}
-				Sample sample_current = new Sample(sampleAsString);
-
-				READING_SAMPLES: while (true) {
-					Sample sample_next = null;
-					if ((sampleAsString = samplesFile.readLine()) != null) {
-						sample_next = new Sample(sampleAsString);
-					}
-//					long indicationId_begin = sample_current.getStartTime();
-					long indicationId_begin = sample_current.getStartTime() + 204;
+				while (samplesFile.hasNext()) {
+					Sample sample = new Sample(samplesFile.next());
+					long indicationId_begin = sample.getStartTime() + 204;
 					long indicationId_end = indicationId_begin + 204 + 696;
-//					long indicationId_end = Long.MAX_VALUE;
-//					if (sample_next != null) {
-//						indicationId_end = sample_next.getStartTime();
-//					}
 
 					String testFileName = folderName + "//"
-							+ String.format("Tr%04d_%02d.txt", sampleId, sample_current.getLabelId());
+							+ String.format("Tr%04d_%02d.txt", sampleId, sample.getLabelId());
 					try (BufferedWriter testFile = new BufferedWriter(new FileWriter(testFileName))) {
 						String indicationAsString;
-						READING_INDICATIONS: while (true) {
-							indicationAsString = indicationsFile.readLine();
-							if (indicationAsString == null) {
-								break READING_INDICATIONS;
-							}
+						while (indicationsFile.hasNext()) {
+							indicationAsString = indicationsFile.next();
 							indicationId += indicationResolutionInMilis;
 
 							if (indicationId >= indicationId_begin) {
@@ -71,14 +52,10 @@ public class PrepareSeparateTestFiles {
 							}
 
 							if (indicationId > indicationId_end) {
-								break READING_INDICATIONS;
+								break;
 							}
 						}
 					}
-					if (sample_next == null) {
-						break READING_SAMPLES;
-					}
-					sample_current = sample_next;
 					sampleId++;
 				}
 			}

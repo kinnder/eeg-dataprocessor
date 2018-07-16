@@ -1,12 +1,13 @@
 package utility;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.NoSuchElementException;
 
-public class StringDataFileReader {
+public class StringDataFileReader implements Closeable {
 	private BufferedReader bufferedReader = null;
 
 	public StringDataFileReader(BufferedReader bufferedReader) {
@@ -17,6 +18,7 @@ public class StringDataFileReader {
 		bufferedReader = new BufferedReader(new FileReader(fileName));
 	}
 
+	@Override
 	public void close() throws IOException {
 		if (bufferedReader != null) {
 			bufferedReader.close();
