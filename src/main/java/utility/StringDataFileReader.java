@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.NoSuchElementException;
 
 public class StringDataFileReader implements Closeable {
-	private BufferedReader bufferedReader = null;
+	private BufferedReader bufferedReader;
 
 	public StringDataFileReader(BufferedReader bufferedReader) {
 		this.bufferedReader = bufferedReader;

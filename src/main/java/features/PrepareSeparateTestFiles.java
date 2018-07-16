@@ -1,18 +1,12 @@
 package features;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 
 import domain.Sample;
 import utility.StringDataFileReader;
-
-/*
- * Заменить FileReader
- * BufferedReader java.nio.file.Files.newBufferedReader(Path path, Charset cs) throws IOException
- */
+import utility.StringDataFileWriter;
 
 public class PrepareSeparateTestFiles {
 
@@ -40,15 +34,14 @@ public class PrepareSeparateTestFiles {
 
 					String testFileName = folderName + "//"
 							+ String.format("Tr%04d_%02d.txt", sampleId, sample.getLabelId());
-					try (BufferedWriter testFile = new BufferedWriter(new FileWriter(testFileName))) {
+					try (StringDataFileWriter testFile = new StringDataFileWriter(testFileName)) {
 						String indicationAsString;
 						while (indicationsFile.hasNext()) {
 							indicationAsString = indicationsFile.next();
 							indicationId += indicationResolutionInMilis;
 
 							if (indicationId >= indicationId_begin) {
-								testFile.write(indicationAsString);
-								testFile.newLine();
+								testFile.writeLine(indicationAsString);
 							}
 
 							if (indicationId > indicationId_end) {
