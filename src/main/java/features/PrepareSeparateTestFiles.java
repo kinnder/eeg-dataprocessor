@@ -25,7 +25,7 @@ public class PrepareSeparateTestFiles {
 		try (StringDataFileReader samplesFile = new StringDataFileReader(samplesFileName)) {
 			try (StringDataFileReader indicationsFile = new StringDataFileReader(indicationsFileName)) {
 				long sampleId = 1;
-				long indicationId = 395570;
+				long indicationId = 0;
 
 				while (samplesFile.hasNext()) {
 					Sample sample = new Sample(samplesFile.next());
@@ -33,15 +33,14 @@ public class PrepareSeparateTestFiles {
 					long indicationId_end = indicationId_begin + 204 + 696;
 
 					String testFileName = folderName + "//"
-							+ String.format("Tr%04d_%02d.txt", sampleId, sample.getLabelId());
+							+ String.format("Tr%04d_%02d.txt", sampleId, sample.getLabel());
 					try (StringDataFileWriter testFile = new StringDataFileWriter(testFileName)) {
-						String indicationAsString;
 						while (indicationsFile.hasNext()) {
-							indicationAsString = indicationsFile.next();
+							String indication = indicationsFile.next();
 							indicationId += indicationResolutionInMilis;
 
 							if (indicationId >= indicationId_begin) {
-								testFile.writeLine(indicationAsString);
+								testFile.writeLine(indication);
 							}
 
 							if (indicationId > indicationId_end) {

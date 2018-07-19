@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Sample {
 
-	double[] data;
+	private double[] data;
 
 	public Sample(String data) {
 		String array[] = splitString(data);
@@ -15,16 +15,16 @@ public class Sample {
 		return (long) data[0];
 	}
 
-	public boolean getHasTriggered() {
+	public boolean getIsTriggered() {
 		return getTriggerTime() > 0;
 	}
 
-	public int getLabelId() {
+	public int getLabel() {
 		return (int) data[1];
 	}
 
 	public long getTriggerTime() {
-		int triggerId = getLabelId();
+		int triggerId = getLabel();
 		return (long) data[1 + triggerId];
 	}
 

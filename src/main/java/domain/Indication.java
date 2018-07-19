@@ -4,12 +4,18 @@ public class Indication {
 
 	double[] data;
 
+	private String dataAsString;
+
 	public Indication(double[] data) {
 		this.data = data;
 	}
 
 	public Indication(String data) {
+		this.dataAsString = data;
+	}
 
+	public String toString() {
+		return dataAsString;
 	}
 
 	private String[] splitString(String data) {
