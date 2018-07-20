@@ -1,11 +1,10 @@
 package features;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 import domain.Sample;
+import domain.SamplesFile;
 
 public class AnalyzeSampleFile {
 	public void action() {
@@ -17,27 +16,18 @@ public class AnalyzeSampleFile {
 		long interval_right = Long.MAX_VALUE;
 		long interval_left = Long.MAX_VALUE;
 
-		try (BufferedReader samplesFile = new BufferedReader(new FileReader(samplesFileName))) {
-			String sampleAsString;
-			if ((sampleAsString = samplesFile.readLine()) == null) {
-				System.out.println("no samples");
-				return;
-			}
-			Sample sample_current = new Sample(sampleAsString);
-
-			READING_SAMPLES: while (true) {
-				Sample sample_next = null;
-				if ((sampleAsString = samplesFile.readLine()) != null) {
-					sample_next = new Sample(sampleAsString);
-				}
+		Sample sample_previous = null;
+		try (SamplesFile samplesFile = new SamplesFile(samplesFileName)) {
+			while (samplesFile.hasNext()) {
+				Sample sample_current = samplesFile.nextSample();
 
 				long triggerTime = sample_current.getTriggerTime();
 				if (triggerTime > 0 && triggerTime < interval_left) {
 					interval_left = triggerTime;
 				}
 
-				if (sample_next != null) {
-					long duration = sample_next.getStartTime() - sample_current.getStartTime();
+				if (sample_previous != null) {
+					long duration = sample_current.getStartTime() - sample_previous.getStartTime();
 					if (duration > duration_longest) {
 						duration_longest = duration;
 					} else if (duration < duration_shortest) {
@@ -48,10 +38,7 @@ public class AnalyzeSampleFile {
 					}
 				}
 
-				if (sample_next == null) {
-					break READING_SAMPLES;
-				}
-				sample_current = sample_next;
+				sample_previous = sample_current;
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
