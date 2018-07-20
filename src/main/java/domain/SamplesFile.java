@@ -8,6 +8,8 @@ import utility.StringDataFileReader;
 
 public class SamplesFile extends StringDataFileReader {
 
+	private long sampleNumber = 1;
+
 	public SamplesFile(BufferedReader bufferedReader) {
 		super(bufferedReader);
 	}
@@ -17,6 +19,8 @@ public class SamplesFile extends StringDataFileReader {
 	}
 
 	public Sample nextSample() throws IOException {
-		return new Sample(next());
+		Sample s = new Sample(sampleNumber, next());
+		sampleNumber++;
+		return s;
 	}
 }

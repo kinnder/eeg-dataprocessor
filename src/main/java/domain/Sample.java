@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class Sample {
 
+	final static long NO_NUMBER = -1;
+
 	private double[] data;
 
 	public Sample(String data) {
@@ -30,5 +32,16 @@ public class Sample {
 
 	private String[] splitString(String data) {
 		return data.split(",");
+	}
+
+	private long number = NO_NUMBER;
+
+	public Sample(long number, String data) {
+		this(data);
+		this.number = number;
+	}
+
+	public long getNumber() {
+		return number;
 	}
 }

@@ -2,6 +2,8 @@ package domain;
 
 public class Indication {
 
+	final static long NO_TIME = -1;
+
 	double[] data;
 
 	private String dataAsString;
@@ -16,6 +18,17 @@ public class Indication {
 
 	public String toString() {
 		return dataAsString;
+	}
+
+	private long time = NO_TIME;
+
+	public long getTime() {
+		return time;
+	}
+
+	public Indication(long time, String data) {
+		this(data);
+		this.time = time;
 	}
 
 	private String[] splitString(String data) {

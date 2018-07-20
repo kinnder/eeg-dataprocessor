@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class SamplesFileTest {
+
 	SamplesFile out;
 
 	private final Mockery context = new Mockery() {
@@ -37,14 +38,24 @@ public class SamplesFileTest {
 	@Test
 	public void testcase_1() throws IOException {
 		final String s1 = "  409596,       1,     696,       0,       0,       0,       1,       0,       0,       0,";
+		final String s2 = "  411610,       2,       0,     494,       0,       0,       0,       1,       0,       0,";
 
 		context.checking(new Expectations() {
 			{
 				oneOf(bufferedReader_mock).readLine();
 				will(returnValue(s1));
+
+				oneOf(bufferedReader_mock).readLine();
+				will(returnValue(s2));
 			}
 		});
 
-		Assert.assertNotNull(out.nextSample());
+		Sample sample = out.nextSample();
+		Assert.assertNotNull(sample);
+		Assert.assertEquals(1, sample.getNumber());
+
+		sample = out.nextSample();
+		Assert.assertNotNull(sample);
+		Assert.assertEquals(2, sample.getNumber());
 	}
 }
