@@ -15,6 +15,9 @@ public class AnalyzeSampleFile {
 		long duration_shortest = Long.MAX_VALUE;
 		long interval_right = Long.MAX_VALUE;
 		long interval_left = Long.MAX_VALUE;
+		long triggerTime_shortest = Long.MAX_VALUE;
+		long triggerTime_longest = Long.MIN_VALUE;
+		long triggerTime_average = Long.MIN_VALUE;
 
 		Sample sample_previous = null;
 		try (SamplesFile samplesFile = new SamplesFile(samplesFileName)) {
@@ -24,6 +27,14 @@ public class AnalyzeSampleFile {
 				long triggerTime = sample_current.getTriggerTime();
 				if (triggerTime > 0 && triggerTime < interval_left) {
 					interval_left = triggerTime;
+				}
+
+				if (triggerTime > 0) {
+					if (triggerTime > triggerTime_longest) {
+						triggerTime_longest = triggerTime;
+					} else if (triggerTime < triggerTime_shortest) {
+						triggerTime_shortest = triggerTime;
+					}
 				}
 
 				if (sample_previous != null) {
@@ -45,10 +56,15 @@ public class AnalyzeSampleFile {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		triggerTime_average = (triggerTime_longest + triggerTime_shortest) / 2;
 
 		System.out.println("Duration-shortest: " + duration_shortest);
 		System.out.println("Duration-longest: " + duration_longest);
 		System.out.println("Interval on the left-shortest : " + interval_left);
 		System.out.println("Interval on the right-shortest: " + interval_right);
+		System.out.println("Trigger-time shortest: " + triggerTime_shortest);
+		System.out.println("Trigger-time longest: " + triggerTime_longest);
+		System.out.println("Trigger-time average: " + triggerTime_average);
 	}
+
 }

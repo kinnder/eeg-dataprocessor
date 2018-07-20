@@ -28,7 +28,7 @@ public class SampleTest {
 		out = new Sample(data);
 
 		Assert.assertEquals(409596, out.getStartTime());
-		Assert.assertEquals(true, out.getIsTriggered());
+		Assert.assertEquals(true, out.hasTriggerTime());
 		Assert.assertEquals(1, out.getLabel());
 		Assert.assertEquals(696, out.getTriggerTime());
 	}
@@ -40,7 +40,7 @@ public class SampleTest {
 		out = new Sample(data);
 
 		Assert.assertEquals(411610, out.getStartTime());
-		Assert.assertEquals(true, out.getIsTriggered());
+		Assert.assertEquals(true, out.hasTriggerTime());
 		Assert.assertEquals(2, out.getLabel());
 		Assert.assertEquals(494, out.getTriggerTime());
 	}
@@ -52,7 +52,7 @@ public class SampleTest {
 		out = new Sample(data);
 
 		Assert.assertEquals(395572, out.getStartTime());
-		Assert.assertEquals(false, out.getIsTriggered());
+		Assert.assertEquals(false, out.hasTriggerTime());
 		Assert.assertEquals(1, out.getLabel());
 		Assert.assertEquals(0, out.getTriggerTime());
 	}

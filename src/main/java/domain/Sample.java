@@ -17,7 +17,7 @@ public class Sample {
 		return (long) data[0];
 	}
 
-	public boolean getIsTriggered() {
+	public boolean hasTriggerTime() {
 		return getTriggerTime() > 0;
 	}
 

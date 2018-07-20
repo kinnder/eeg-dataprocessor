@@ -18,6 +18,12 @@ public class PrepareSeparateTestFiles {
 		final String samplesFileName = path + "BNDmetki.txt";
 		final String folderName = path + "bnd";
 
+		final long signalTime = 300;
+		final long triggerTimeAverage = 450;
+		final long deltaLeft = 204;
+		final long deltaRight = 396;
+		final long durationAverage = 1984;
+
 		File folder = new File(folderName);
 		if (!folder.exists()) {
 			folder.mkdir();
@@ -27,8 +33,17 @@ public class PrepareSeparateTestFiles {
 			try (IndicationsFile indicationsFile = new IndicationsFile(indicationsFileName)) {
 				while (samplesFile.hasNext()) {
 					Sample sample = samplesFile.nextSample();
-					long sampleTime_begin = sample.getStartTime() + 204;
-					long sampleTime_end = sampleTime_begin + 204 + 696;
+					long sampleTime_begin = sample.getStartTime() + signalTime;
+					if (sample.hasTriggerTime()) {
+						sampleTime_begin += sample.getTriggerTime();
+					} else {
+						sampleTime_begin += triggerTimeAverage;
+					}
+					sampleTime_begin -= deltaLeft;
+					long sampleTime_end = sampleTime_begin + deltaLeft + deltaRight;
+					if (sampleTime_end > sample.getStartTime() + durationAverage) {
+						sampleTime_end = sample.getStartTime() + durationAverage;
+					}
 
 					String testFileName = folderName + "//"
 							+ String.format("Tr%04d_%02d.txt", sample.getNumber(), sample.getLabel());
