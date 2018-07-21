@@ -67,4 +67,8 @@ public class AnalyzeSampleFile {
 		System.out.println("Trigger-time average: " + triggerTime_average);
 	}
 
+	public static void main(String args[]) {
+		AnalyzeSampleFile feature = new AnalyzeSampleFile();
+		feature.action();
+	}
 }

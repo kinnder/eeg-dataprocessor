@@ -1,6 +1,7 @@
 *bin/
 *target/
 *settings/
+*data/
 
 .classpath
 .project
