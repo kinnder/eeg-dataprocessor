@@ -27,36 +27,34 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 	 */
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// <editor-fold defaultstate="collapsed" desc="Generated
+	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
 		jScrollPane1 = new javax.swing.JScrollPane();
-		jTextArea1 = new javax.swing.JTextArea();
+		jtaOutput = new javax.swing.JTextArea();
 		jScrollPane2 = new javax.swing.JScrollPane();
-		jTable1 = new javax.swing.JTable();
-		jMenuBar1 = new javax.swing.JMenuBar();
-		jMenu1 = new javax.swing.JMenu();
-		jMenuItem8 = new javax.swing.JMenuItem();
+		jtParameters = new javax.swing.JTable();
+		jmbMainMenu = new javax.swing.JMenuBar();
+		jmFile = new javax.swing.JMenu();
+		jmiSelectFiles = new javax.swing.JMenuItem();
 		jSeparator1 = new javax.swing.JPopupMenu.Separator();
-		jMenuItem1 = new javax.swing.JMenuItem();
-		jMenu3 = new javax.swing.JMenu();
-		jMenuItem2 = new javax.swing.JMenuItem();
-		jMenuItem3 = new javax.swing.JMenuItem();
-		jMenuItem4 = new javax.swing.JMenuItem();
-		jMenuItem5 = new javax.swing.JMenuItem();
-		jMenu4 = new javax.swing.JMenu();
-		jMenuItem6 = new javax.swing.JMenuItem();
-		jMenuItem7 = new javax.swing.JMenuItem();
+		jmiExit = new javax.swing.JMenuItem();
+		jmTask = new javax.swing.JMenu();
+		jmiPrepareSeparateTestFiles = new javax.swing.JMenuItem();
+		jmHelp = new javax.swing.JMenu();
+		jmiHelp = new javax.swing.JMenuItem();
+		jmiAbout = new javax.swing.JMenuItem();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("EEGDataProcessor");
 
-		jTextArea1.setEditable(false);
-		jTextArea1.setColumns(20);
-		jTextArea1.setRows(5);
-		jScrollPane1.setViewportView(jTextArea1);
+		jtaOutput.setEditable(false);
+		jtaOutput.setColumns(20);
+		jtaOutput.setRows(5);
+		jScrollPane1.setViewportView(jtaOutput);
 
-		jTable1.setModel(new javax.swing.table.DefaultTableModel(
+		jtParameters.setModel(new javax.swing.table.DefaultTableModel(
 				new Object[][] { { "signalTime", "300" }, { "interval_right", null }, { "interval_left", null },
 						{ "duration_average", null }, { "triggerTime_average", null } },
 				new String[] { "Параметр", "Значение" }) {
@@ -72,46 +70,37 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 				return canEdit[columnIndex];
 			}
 		});
-		jScrollPane2.setViewportView(jTable1);
+		jScrollPane2.setViewportView(jtParameters);
 
-		jMenu1.setText("Файл");
+		jmFile.setText("Файл");
 
-		jMenuItem8.setText("Выбрать файлы...");
-		jMenu1.add(jMenuItem8);
-		jMenu1.add(jSeparator1);
+		jmiSelectFiles.setText("Выбрать файлы...");
+		jmFile.add(jmiSelectFiles);
+		jmFile.add(jSeparator1);
 
-		jMenuItem1.setText("Выход");
-		jMenu1.add(jMenuItem1);
+		jmiExit.setText("Выход");
+		jmFile.add(jmiExit);
 
-		jMenuBar1.add(jMenu1);
+		jmbMainMenu.add(jmFile);
 
-		jMenu3.setText("Задача");
+		jmTask.setText("Задача");
 
-		jMenuItem2.setText("Подготовить файлы \"Отдельная проба\"");
-		jMenu3.add(jMenuItem2);
+		jmiPrepareSeparateTestFiles.setText("Подготовить файлы \"Отдельная проба\"");
+		jmTask.add(jmiPrepareSeparateTestFiles);
 
-		jMenuItem3.setText("jMenuItem3");
-		jMenu3.add(jMenuItem3);
+		jmbMainMenu.add(jmTask);
 
-		jMenuItem4.setText("jMenuItem4");
-		jMenu3.add(jMenuItem4);
+		jmHelp.setText("?");
 
-		jMenuItem5.setText("jMenuItem5");
-		jMenu3.add(jMenuItem5);
+		jmiHelp.setText("Справка");
+		jmHelp.add(jmiHelp);
 
-		jMenuBar1.add(jMenu3);
+		jmiAbout.setText("О программе...");
+		jmHelp.add(jmiAbout);
 
-		jMenu4.setText("?");
+		jmbMainMenu.add(jmHelp);
 
-		jMenuItem6.setText("Справка");
-		jMenu4.add(jMenuItem6);
-
-		jMenuItem7.setText("О программе...");
-		jMenu4.add(jMenuItem7);
-
-		jMenuBar1.add(jMenu4);
-
-		setJMenuBar(jMenuBar1);
+		setJMenuBar(jmbMainMenu);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -147,46 +136,35 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 					break;
 				}
 			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(EEGDataProcessorFrame.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(EEGDataProcessorFrame.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(EEGDataProcessorFrame.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| javax.swing.UnsupportedLookAndFeelException ex) {
 			java.util.logging.Logger.getLogger(EEGDataProcessorFrame.class.getName())
 					.log(java.util.logging.Level.SEVERE, null, ex);
 		}
 		// </editor-fold>
 
+		// </editor-fold>
+
 		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new EEGDataProcessorFrame().setVisible(true);
-			}
+		java.awt.EventQueue.invokeLater(() -> {
+			new EEGDataProcessorFrame().setVisible(true);
 		});
 	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JMenu jMenu1;
-	private javax.swing.JMenu jMenu3;
-	private javax.swing.JMenu jMenu4;
-	private javax.swing.JMenuBar jMenuBar1;
-	private javax.swing.JMenuItem jMenuItem1;
-	private javax.swing.JMenuItem jMenuItem2;
-	private javax.swing.JMenuItem jMenuItem3;
-	private javax.swing.JMenuItem jMenuItem4;
-	private javax.swing.JMenuItem jMenuItem5;
-	private javax.swing.JMenuItem jMenuItem6;
-	private javax.swing.JMenuItem jMenuItem7;
-	private javax.swing.JMenuItem jMenuItem8;
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JScrollPane jScrollPane2;
 	private javax.swing.JPopupMenu.Separator jSeparator1;
-	private javax.swing.JTable jTable1;
-	private javax.swing.JTextArea jTextArea1;
+	private javax.swing.JMenu jmFile;
+	private javax.swing.JMenu jmHelp;
+	private javax.swing.JMenu jmTask;
+	private javax.swing.JMenuBar jmbMainMenu;
+	private javax.swing.JMenuItem jmiAbout;
+	private javax.swing.JMenuItem jmiExit;
+	private javax.swing.JMenuItem jmiHelp;
+	private javax.swing.JMenuItem jmiPrepareSeparateTestFiles;
+	private javax.swing.JMenuItem jmiSelectFiles;
+	private javax.swing.JTable jtParameters;
+	private javax.swing.JTextArea jtaOutput;
 	// End of variables declaration//GEN-END:variables
 }
