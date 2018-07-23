@@ -1,5 +1,6 @@
 package features;
 
+import application.ApplicationData;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,18 +12,35 @@ import domain.SamplesFile;
 import utility.StringDataFileWriter;
 
 public class PrepareSeparateTestFiles {
+
+	final String indicationsFileName;
+
+	final String samplesFileName;
+
+	final String folderName;
+
+	final long signalTime;
+
+	final long triggerTime_average;
+
+	final long interval_left;
+
+	final long interval_right;
+
+	final long duration_min;
+
+	public PrepareSeparateTestFiles(ApplicationData data) {
+		indicationsFileName = data.getIndicationsFileName();
+		samplesFileName = data.getSamplesFileName();
+		folderName = data.getOutputFolder();
+		signalTime = data.getSignalTime();
+		triggerTime_average = data.getTriggerTimeAverage();
+		interval_left = data.getIntervalLeft();
+		interval_right = data.getIntervalRight();
+		duration_min = data.getDurationMin();
+	}
+
 	public void action() {
-		final String path = "data//";
-		final String indicationsFileName = path + "bnd.txt";
-		final String samplesFileName = path + "BNDmetki.txt";
-		final String folderName = path + "bnd";
-
-		final long signalTime = 300;
-		final long triggerTime_average = 450;
-		final long interval_left = 204;
-		final long interval_right = 396;
-		final long duration_average = 1984;
-
 		File folder = new File(folderName);
 		if (!folder.exists()) {
 			folder.mkdir();
@@ -40,8 +58,8 @@ public class PrepareSeparateTestFiles {
 					}
 					sampleTime_begin -= interval_left;
 					long sampleTime_end = sampleTime_begin + interval_left + interval_right;
-					if (sampleTime_end > sample.getStartTime() + duration_average) {
-						sampleTime_end = sample.getStartTime() + duration_average;
+					if (sampleTime_end > sample.getStartTime() + duration_min) {
+						sampleTime_end = sample.getStartTime() + duration_min;
 					}
 
 					String testFileName = folderName + "//"
@@ -69,7 +87,18 @@ public class PrepareSeparateTestFiles {
 	}
 
 	public static void main(String args[]) {
-		PrepareSeparateTestFiles feature = new PrepareSeparateTestFiles();
+		ApplicationData applicationData = new ApplicationData();
+		applicationData.setSamplesFileName("data//BNDmetki.txt");
+		applicationData.setIndicationsFileName("data//bnd.txt");
+		applicationData.setOutputFolder("data//bnd");
+
+		applicationData.setSignalTime(300);
+		applicationData.setTriggerTimeAverage(450);
+		applicationData.setIntervalLeft(204);
+		applicationData.setIntervalRight(396);
+		applicationData.setDurationMin(1984);
+
+		PrepareSeparateTestFiles feature = new PrepareSeparateTestFiles(applicationData);
 		feature.action();
 	}
 }

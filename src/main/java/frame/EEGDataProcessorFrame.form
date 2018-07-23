@@ -13,6 +13,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x412;&#x44b;&#x431;&#x440;&#x430;&#x442;&#x44c; &#x444;&#x430;&#x439;&#x43b;&#x44b;..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiSelectFilesActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
             </MenuItem>
@@ -20,6 +23,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x412;&#x44b;&#x445;&#x43e;&#x434;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiExitActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -32,6 +38,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x434;&#x433;&#x43e;&#x442;&#x43e;&#x432;&#x438;&#x442;&#x44c; &#x444;&#x430;&#x439;&#x43b;&#x44b; &quot;&#x41e;&#x442;&#x434;&#x435;&#x43b;&#x44c;&#x43d;&#x430;&#x44f; &#x43f;&#x440;&#x43e;&#x431;&#x430;&quot;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPrepareSeparateTestFilesActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -58,6 +67,7 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="EEGDataProcessor"/>
+    <Property name="locationByPlatform" type="boolean" value="true"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jmbMainMenu"/>
@@ -126,11 +136,11 @@
                   <Data value="signalTime"/>
                   <Data value="interval_right"/>
                   <Data value="interval_left"/>
-                  <Data value="duration_average"/>
+                  <Data value="duration_min"/>
                   <Data value="triggerTime_average"/>
                 </Column>
                 <Column editable="true" title="&#x417;&#x43d;&#x430;&#x447;&#x435;&#x43d;&#x438;&#x435;" type="java.lang.String">
-                  <Data value="300"/>
+                  <Data value=""/>
                   <Data value="null"/>
                   <Data value="null"/>
                   <Data value="null"/>
