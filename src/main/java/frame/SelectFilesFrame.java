@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package frame;
 
 import application.ApplicationData;
 import java.io.File;
 import javax.swing.JFileChooser;
 
-/**
- *
- * @author kinnder@mail.ru
- */
 public class SelectFilesFrame extends javax.swing.JDialog {
 
 	private static final long serialVersionUID = 2531851493293695868L;
@@ -200,25 +191,6 @@ public class SelectFilesFrame extends javax.swing.JDialog {
 			jtfOutputFolder.setText(path);
 		}
 	}// GEN-LAST:event_jbSelectOutputFolderActionPerformed
-
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String args[]) {
-		/* Set the look and feel */
-		try {
-			javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(SelectFilesFrame.class.getName()).log(java.util.logging.Level.SEVERE,
-					null, ex);
-		}
-
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(() -> {
-			new SelectFilesFrame().setVisible(true);
-		});
-	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton jbCancel;

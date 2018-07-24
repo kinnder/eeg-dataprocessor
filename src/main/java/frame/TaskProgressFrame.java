@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package frame;
 
 import application.ApplicationData;
 import features.PrepareSeparateTestFiles;
 
-/**
- *
- * @author kinnder@mail.ru
- */
 public class TaskProgressFrame extends javax.swing.JDialog {
 
 	private static final long serialVersionUID = 1488232629320424390L;
@@ -91,25 +82,6 @@ public class TaskProgressFrame extends javax.swing.JDialog {
 		feature.action();
 		jpbProgress.setValue(100);
 	}// GEN-LAST:event_formComponentShown
-
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String args[]) {
-		/* Set the look and feel */
-		try {
-			javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(TaskProgressFrame.class.getName()).log(java.util.logging.Level.SEVERE,
-					null, ex);
-		}
-
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(() -> {
-			new TaskProgressFrame().setVisible(true);
-		});
-	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton jbCancel;

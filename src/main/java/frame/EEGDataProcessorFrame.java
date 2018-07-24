@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package frame;
 
 import application.ApplicationData;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.TableModel;
 
-/**
- *
- * @author kinnder@mail.ru
- */
+
 public class EEGDataProcessorFrame extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = -5065287789826423012L;
@@ -192,26 +184,6 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 			new TaskProgressFrame(applicationData).setVisible(true);
 		});
 	}// GEN-LAST:event_jmiPrepareSeparateTestFilesActionPerformed
-
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String args[]) {
-		/* Set the look and feel */
-		try {
-			javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(EEGDataProcessorFrame.class.getName())
-					.log(java.util.logging.Level.SEVERE, null, ex);
-		}
-
-		ApplicationData applicationData = new ApplicationData();
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(() -> {
-			new EEGDataProcessorFrame(applicationData).setVisible(true);
-		});
-	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JScrollPane jScrollPane1;
