@@ -1,5 +1,7 @@
 package frame;
 
+import java.awt.EventQueue;
+
 import event.FeatureStatus;
 import event.FeatureStatusListener;
 import feature.Feature;
@@ -92,6 +94,10 @@ public class TaskProgressFrame extends javax.swing.JDialog implements FeatureSta
 			break;
 		case FeatureStatus.COMPLETED:
 			jpbProgress.setValue(100);
+			EventQueue.invokeLater(() -> {
+				featureThread.interrupt();
+				this.dispose();
+			});
 			break;
 		}
 	}

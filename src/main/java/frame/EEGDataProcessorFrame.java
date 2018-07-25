@@ -1,11 +1,12 @@
 package frame;
 
 import application.ApplicationData;
+import event.FeatureStatus;
+import feature.AnalyzeSamplesFile;
 import feature.PrepareSeparateTestFiles;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.TableModel;
-
 
 public class EEGDataProcessorFrame extends javax.swing.JFrame {
 
@@ -79,6 +80,7 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 		jSeparator1 = new javax.swing.JPopupMenu.Separator();
 		jmiExit = new javax.swing.JMenuItem();
 		jmTask = new javax.swing.JMenu();
+		jmiAnalyzeSamplesFile = new javax.swing.JMenuItem();
 		jmiPrepareSeparateTestFiles = new javax.swing.JMenuItem();
 		jmHelp = new javax.swing.JMenu();
 		jmiHelp = new javax.swing.JMenuItem();
@@ -94,7 +96,7 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 		jScrollPane1.setViewportView(jtaOutput);
 
 		jtParameters.setModel(new javax.swing.table.DefaultTableModel(
-				new Object[][] { { "signalTime", "" }, { "interval_right", null }, { "interval_left", null },
+				new Object[][] { { "signalTime", "" }, { "interval_left", null }, { "interval_right", null },
 						{ "duration_min", null }, { "triggerTime_average", null } },
 				new String[] { "Параметр", "Значение" }) {
 			private static final long serialVersionUID = -7692149791349207355L;
@@ -134,6 +136,14 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 
 		jmTask.setText("Задача");
 
+		jmiAnalyzeSamplesFile.setText("Анализ файла меток");
+		jmiAnalyzeSamplesFile.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jmiAnalyzeSamplesFileActionPerformed(evt);
+			}
+		});
+		jmTask.add(jmiAnalyzeSamplesFile);
+
 		jmiPrepareSeparateTestFiles.setText("Подготовить файлы \"Отдельная проба\"");
 		jmiPrepareSeparateTestFiles.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,6 +181,23 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
+	private void jmiAnalyzeSamplesFileActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmiAnalyzeSamplesFileActionPerformed
+		java.awt.EventQueue.invokeLater(() -> {
+			AnalyzeSamplesFile feature = new AnalyzeSamplesFile(applicationData);
+			feature.addFeatureStatusListener((FeatureStatus event) -> {
+				if (event.getType() == FeatureStatus.COMPLETED) {
+					TableModel model = jtParameters.getModel();
+					model.setValueAt(Long.toString(applicationData.getIntervalLeft()), ROW_ID_INTERVAL_LEFT, 1);
+					model.setValueAt(Long.toString(applicationData.getIntervalRight()), ROW_ID_INTERVAL_RIGHT, 1);
+					model.setValueAt(Long.toString(applicationData.getDurationMin()), ROW_ID_DURATION_MIN, 1);
+					model.setValueAt(Long.toString(applicationData.getTriggerTimeAverage()), ROW_ID_TRIGGERTIME_AVERAGE,
+							1);
+				}
+			});
+			new TaskProgressFrame(feature).setVisible(true);
+		});
+	}// GEN-LAST:event_jmiAnalyzeSamplesFileActionPerformed
+
 	private void jmiExitActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmiExitActionPerformed
 		this.dispose();
 	}// GEN-LAST:event_jmiExitActionPerformed
@@ -197,6 +224,7 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 	private javax.swing.JMenu jmTask;
 	private javax.swing.JMenuBar jmbMainMenu;
 	private javax.swing.JMenuItem jmiAbout;
+	private javax.swing.JMenuItem jmiAnalyzeSamplesFile;
 	private javax.swing.JMenuItem jmiExit;
 	private javax.swing.JMenuItem jmiHelp;
 	private javax.swing.JMenuItem jmiPrepareSeparateTestFiles;

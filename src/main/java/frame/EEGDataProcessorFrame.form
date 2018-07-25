@@ -34,6 +34,14 @@
             <Property name="text" type="java.lang.String" value="&#x417;&#x430;&#x434;&#x430;&#x447;&#x430;"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiAnalyzeSamplesFile">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x410;&#x43d;&#x430;&#x43b;&#x438;&#x437; &#x444;&#x430;&#x439;&#x43b;&#x430; &#x43c;&#x435;&#x442;&#x43e;&#x43a;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiAnalyzeSamplesFileActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiPrepareSeparateTestFiles">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x434;&#x433;&#x43e;&#x442;&#x43e;&#x432;&#x438;&#x442;&#x44c; &#x444;&#x430;&#x439;&#x43b;&#x44b; &quot;&#x41e;&#x442;&#x434;&#x435;&#x43b;&#x44c;&#x43d;&#x430;&#x44f; &#x43f;&#x440;&#x43e;&#x431;&#x430;&quot;"/>
@@ -134,8 +142,8 @@
               <Table columnCount="2" rowCount="5">
                 <Column editable="false" title="&#x41f;&#x430;&#x440;&#x430;&#x43c;&#x435;&#x442;&#x440;" type="java.lang.String">
                   <Data value="signalTime"/>
-                  <Data value="interval_right"/>
                   <Data value="interval_left"/>
+                  <Data value="interval_right"/>
                   <Data value="duration_min"/>
                   <Data value="triggerTime_average"/>
                 </Column>

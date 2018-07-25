@@ -53,16 +53,16 @@ public class PrepareSeparateTestFiles extends Feature {
 			try (IndicationsFile indicationsFile = new IndicationsFile(indicationsFileName)) {
 				while (samplesFile.hasNext()) {
 					Sample sample = samplesFile.nextSample();
-					long sampleTime_begin = sample.getStartTime() + signalTime;
+					long intervalTime_begin = sample.getStartTime() + signalTime;
 					if (sample.hasTriggerTime()) {
-						sampleTime_begin += sample.getTriggerTime();
+						intervalTime_begin += sample.getTriggerTime();
 					} else {
-						sampleTime_begin += triggerTime_average;
+						intervalTime_begin += triggerTime_average;
 					}
-					sampleTime_begin -= interval_left;
-					long sampleTime_end = sampleTime_begin + interval_left + interval_right;
-					if (sampleTime_end > sample.getStartTime() + duration_min) {
-						sampleTime_end = sample.getStartTime() + duration_min;
+					intervalTime_begin -= interval_left;
+					long intervalTime_end = intervalTime_begin + interval_left + interval_right;
+					if (intervalTime_end > sample.getStartTime() + duration_min) {
+						intervalTime_end = sample.getStartTime() + duration_min;
 					}
 
 					String testFileName = folderName + "//"
@@ -71,11 +71,11 @@ public class PrepareSeparateTestFiles extends Feature {
 						while (indicationsFile.hasNext()) {
 							Indication indication = indicationsFile.nextIndication();
 
-							if (indication.getTime() > sampleTime_end) {
+							if (indication.getTime() > intervalTime_end) {
 								break;
 							}
 
-							if (indication.getTime() >= sampleTime_begin) {
+							if (indication.getTime() >= intervalTime_begin) {
 								testFile.writeLine(indication.toString());
 							}
 						}
