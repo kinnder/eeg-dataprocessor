@@ -1,4 +1,4 @@
-package features;
+package feature;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -6,8 +6,10 @@ import java.io.IOException;
 import domain.Sample;
 import domain.SamplesFile;
 
-public class AnalyzeSampleFile {
-	public void action() {
+public class AnalyzeSampleFile extends Feature {
+
+	@Override
+	public void run() {
 		final String path = "data//";
 		final String samplesFileName = path + "BNDmetki.txt";
 
@@ -69,6 +71,6 @@ public class AnalyzeSampleFile {
 
 	public static void main(String args[]) {
 		AnalyzeSampleFile feature = new AnalyzeSampleFile();
-		feature.action();
+		feature.run();
 	}
 }

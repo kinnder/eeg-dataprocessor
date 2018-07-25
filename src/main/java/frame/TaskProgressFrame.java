@@ -1,9 +1,10 @@
 package frame;
 
-import application.ApplicationData;
-import features.PrepareSeparateTestFiles;
+import event.FeatureStatus;
+import event.FeatureStatusListener;
+import feature.Feature;
 
-public class TaskProgressFrame extends javax.swing.JDialog {
+public class TaskProgressFrame extends javax.swing.JDialog implements FeatureStatusListener {
 
 	private static final long serialVersionUID = 1488232629320424390L;
 
@@ -15,11 +16,12 @@ public class TaskProgressFrame extends javax.swing.JDialog {
 		setModal(true);
 	}
 
-	private ApplicationData applicationData;
+	Thread featureThread;
 
-	public TaskProgressFrame(ApplicationData applicationData) {
+	public TaskProgressFrame(Feature feature) {
 		this();
-		this.applicationData = applicationData;
+		featureThread = new Thread(feature);
+		feature.addFeatureStatusListener(this);
 	}
 
 	/**
@@ -72,16 +74,27 @@ public class TaskProgressFrame extends javax.swing.JDialog {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void jbCancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbCancelActionPerformed
+		featureThread.interrupt();
 		this.dispose();
 	}// GEN-LAST:event_jbCancelActionPerformed
 
 	private void formComponentShown(java.awt.event.ComponentEvent evt) {// GEN-FIRST:event_formComponentShown
-		// TODO add your handling code here:
-		PrepareSeparateTestFiles feature = new PrepareSeparateTestFiles(applicationData);
-		jpbProgress.setValue(0);
-		feature.action();
-		jpbProgress.setValue(100);
+		featureThread.start();
 	}// GEN-LAST:event_formComponentShown
+
+	@Override
+	public void notifyFeatureStatus(FeatureStatus event) {
+		switch (event.getType()) {
+		case FeatureStatus.STARTED:
+			jpbProgress.setValue(0);
+			break;
+		case FeatureStatus.UPDATED:
+			break;
+		case FeatureStatus.COMPLETED:
+			jpbProgress.setValue(100);
+			break;
+		}
+	}
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JButton jbCancel;

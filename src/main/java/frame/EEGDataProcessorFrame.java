@@ -1,6 +1,8 @@
 package frame;
 
 import application.ApplicationData;
+import feature.PrepareSeparateTestFiles;
+
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.TableModel;
 
@@ -181,7 +183,8 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 
 	private void jmiPrepareSeparateTestFilesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmiPrepareSeparateTestFilesActionPerformed
 		java.awt.EventQueue.invokeLater(() -> {
-			new TaskProgressFrame(applicationData).setVisible(true);
+			PrepareSeparateTestFiles feature = new PrepareSeparateTestFiles(applicationData);
+			new TaskProgressFrame(feature).setVisible(true);
 		});
 	}// GEN-LAST:event_jmiPrepareSeparateTestFilesActionPerformed
 

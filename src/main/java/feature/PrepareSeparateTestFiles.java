@@ -1,4 +1,4 @@
-package features;
+package feature;
 
 import application.ApplicationData;
 import java.io.File;
@@ -9,9 +9,10 @@ import domain.Indication;
 import domain.IndicationsFile;
 import domain.Sample;
 import domain.SamplesFile;
+import event.FeatureStatus;
 import utility.StringDataFileWriter;
 
-public class PrepareSeparateTestFiles {
+public class PrepareSeparateTestFiles extends Feature {
 
 	final String indicationsFileName;
 
@@ -40,7 +41,9 @@ public class PrepareSeparateTestFiles {
 		duration_min = data.getDurationMin();
 	}
 
-	public void action() {
+	@Override
+	public void run() {
+		notifyFeatureStatus(new FeatureStatus(FeatureStatus.STARTED));
 		File folder = new File(folderName);
 		if (!folder.exists()) {
 			folder.mkdir();
@@ -77,6 +80,7 @@ public class PrepareSeparateTestFiles {
 							}
 						}
 					}
+					notifyFeatureStatus(new FeatureStatus(FeatureStatus.UPDATED));
 				}
 			}
 		} catch (FileNotFoundException e) {
@@ -84,6 +88,7 @@ public class PrepareSeparateTestFiles {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		notifyFeatureStatus(new FeatureStatus(FeatureStatus.COMPLETED));
 	}
 
 	public static void main(String args[]) {
@@ -99,6 +104,6 @@ public class PrepareSeparateTestFiles {
 		applicationData.setDurationMin(1984);
 
 		PrepareSeparateTestFiles feature = new PrepareSeparateTestFiles(applicationData);
-		feature.action();
+		feature.run();
 	}
 }
