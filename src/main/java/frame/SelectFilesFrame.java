@@ -24,6 +24,7 @@ public class SelectFilesFrame extends javax.swing.JDialog {
 		jtfSamplesFile.setText(applicationData.getSamplesFileName());
 		jtfIndicationsFile.setText(applicationData.getIndicationsFileName());
 		jtfOutputFolder.setText(applicationData.getOutputFolder());
+		jfcSelectFile.setCurrentDirectory(new File("").getAbsoluteFile());
 	}
 
 	/**
@@ -34,6 +35,7 @@ public class SelectFilesFrame extends javax.swing.JDialog {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
+		jfcSelectFile = new javax.swing.JFileChooser();
 		jtfIndicationsFile = new javax.swing.JTextField();
 		jbSelectIndicationsFile = new javax.swing.JButton();
 		jbSelectSamplesFile = new javax.swing.JButton();
@@ -165,29 +167,28 @@ public class SelectFilesFrame extends javax.swing.JDialog {
 	}// GEN-LAST:event_jbDoneActionPerformed
 
 	private void jbSelectSamplesFileActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbSelectSamplesFileActionPerformed
-		JFileChooser jfc = new JFileChooser(new File("").getAbsolutePath());
-		int result = jfc.showOpenDialog(this);
+		jfcSelectFile.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		int result = jfcSelectFile.showOpenDialog(this);
 		if (result == JFileChooser.APPROVE_OPTION) {
-			String path = jfc.getSelectedFile().getPath();
+			String path = jfcSelectFile.getSelectedFile().getPath();
 			jtfSamplesFile.setText(path);
 		}
 	}// GEN-LAST:event_jbSelectSamplesFileActionPerformed
 
 	private void jbSelectIndicationsFileActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbSelectIndicationsFileActionPerformed
-		JFileChooser jfc = new JFileChooser(new File("").getAbsolutePath());
-		int result = jfc.showOpenDialog(this);
+		jfcSelectFile.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		int result = jfcSelectFile.showOpenDialog(this);
 		if (result == JFileChooser.APPROVE_OPTION) {
-			String path = jfc.getSelectedFile().getPath();
+			String path = jfcSelectFile.getSelectedFile().getPath();
 			jtfIndicationsFile.setText(path);
 		}
 	}// GEN-LAST:event_jbSelectIndicationsFileActionPerformed
 
 	private void jbSelectOutputFolderActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jbSelectOutputFolderActionPerformed
-		JFileChooser jfc = new JFileChooser(new File("").getAbsolutePath());
-		jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		int result = jfc.showOpenDialog(this);
+		jfcSelectFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		int result = jfcSelectFile.showOpenDialog(this);
 		if (result == JFileChooser.APPROVE_OPTION) {
-			String path = jfc.getSelectedFile().getPath();
+			String path = jfcSelectFile.getSelectedFile().getPath();
 			jtfOutputFolder.setText(path);
 		}
 	}// GEN-LAST:event_jbSelectOutputFolderActionPerformed
@@ -198,6 +199,7 @@ public class SelectFilesFrame extends javax.swing.JDialog {
 	private javax.swing.JButton jbSelectIndicationsFile;
 	private javax.swing.JButton jbSelectOutputFolder;
 	private javax.swing.JButton jbSelectSamplesFile;
+	private javax.swing.JFileChooser jfcSelectFile;
 	private javax.swing.JLabel jlIndicationsFile;
 	private javax.swing.JLabel jlOutputFolder;
 	private javax.swing.JLabel jlSamplesFile;
