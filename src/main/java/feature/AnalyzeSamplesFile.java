@@ -58,7 +58,7 @@ public class AnalyzeSamplesFile extends Feature {
 				Sample sample_current = samplesFile.nextSample();
 
 				if (sample_current.hasTriggerTime()) {
-					long triggerTime = sample_current.getTriggerTime() + signalTime;
+					long triggerTime = sample_current.getTriggerTime();
 					if (triggerTime > triggerTime_longest) {
 						triggerTime_longest = triggerTime;
 					} else if (triggerTime < triggerTime_shortest) {
@@ -84,21 +84,16 @@ public class AnalyzeSamplesFile extends Feature {
 			e.printStackTrace();
 		}
 		triggerTime_average = (triggerTime_longest + triggerTime_shortest) / 2;
-		interval_left = triggerTime_shortest;
-		interval_right = duration_shortest - triggerTime_longest;
+		interval_left = triggerTime_shortest + signalTime;
+		interval_right = duration_shortest - triggerTime_longest - signalTime;
 
-		System.out.println("Duration-shortest: " + duration_shortest);
-		System.out.println("Duration-longest: " + duration_longest);
-		System.out.println("Interval on the left-shortest : " + interval_left);
-		System.out.println("Interval on the right-shortest: " + interval_right);
-		System.out.println("Trigger-time shortest: " + triggerTime_shortest);
-		System.out.println("Trigger-time longest: " + triggerTime_longest);
-		System.out.println("Trigger-time average: " + triggerTime_average);
-
+		data.setTriggerTimeMin(triggerTime_shortest);
+		data.setTriggerTimeMax(triggerTime_longest);
 		data.setTriggerTimeAverage(triggerTime_average);
 		data.setIntervalLeft(interval_left);
 		data.setIntervalRight(interval_right);
 		data.setDurationMin(duration_shortest);
+		data.setDurationMax(duration_longest);
 		notifyFeatureStatus(new FeatureStatus(FeatureStatus.COMPLETED));
 	}
 
@@ -116,5 +111,13 @@ public class AnalyzeSamplesFile extends Feature {
 
 		AnalyzeSamplesFile feature = new AnalyzeSamplesFile(applicationData);
 		feature.run();
+
+		System.out.println("Duration-shortest: " + applicationData.getDurationMin());
+		System.out.println("Duration-longest : " + applicationData.getDurationMax());
+		System.out.println("Interval on the left-shortest : " + applicationData.getIntervalLeft());
+		System.out.println("Interval on the right-shortest: " + applicationData.getIntervalRight());
+		System.out.println("Trigger-time shortest: " + applicationData.getTriggerTimeMin());
+		System.out.println("Trigger-time longest : " + applicationData.getTriggerTimeMax());
+		System.out.println("Trigger-time average : " + applicationData.getTriggerTimeAverage());
 	}
 }

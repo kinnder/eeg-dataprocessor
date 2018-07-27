@@ -52,6 +52,26 @@ public class ApplicationData {
 		triggerTime_average = value;
 	}
 
+	private long triggerTime_min;
+
+	public void setTriggerTimeMin(long value) {
+		triggerTime_min = value;
+	}
+
+	public long getTriggerTimeMin() {
+		return triggerTime_min;
+	}
+
+	private long triggerTime_max;
+
+	public void setTriggerTimeMax(long value) {
+		triggerTime_max = value;
+	}
+
+	public long getTriggerTimeMax() {
+		return triggerTime_max;
+	}
+
 	private long interval_left = 204;
 
 	public long getIntervalLeft() {
@@ -80,5 +100,15 @@ public class ApplicationData {
 
 	public void setDurationMin(long value) {
 		duration_min = value;
+	}
+
+	private long duration_max;
+
+	public void setDurationMax(long value) {
+		duration_max = value;
+	}
+
+	public long getDurationMax() {
+		return duration_max;
 	}
 }
