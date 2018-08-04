@@ -111,4 +111,24 @@ public class ApplicationData {
 	public long getDurationMax() {
 		return duration_max;
 	}
+
+	private long samplesAmount_total;
+
+	public void setSamplesAmountTotal(long value) {
+		samplesAmount_total = value;
+	}
+
+	public long getSamplesAmountTotal() {
+		return samplesAmount_total;
+	}
+
+	private long samplesAmount_triggered;
+
+	public void setSamplesAmountTriggered(long value) {
+		samplesAmount_triggered = value;
+	}
+
+	public long getSamplesAmountTriggered() {
+		return samplesAmount_triggered;
+	}
 }

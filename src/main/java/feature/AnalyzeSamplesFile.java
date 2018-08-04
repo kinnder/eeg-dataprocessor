@@ -50,12 +50,15 @@ public class AnalyzeSamplesFile extends Feature {
 		long interval_left = Long.MAX_VALUE;
 		long triggerTime_shortest = Long.MAX_VALUE;
 		long triggerTime_longest = Long.MIN_VALUE;
-		long triggerTime_average = Long.MIN_VALUE;
+		long triggerTime_average = 0;
+		long samplesAmount_total = 0;
+		long samplesAmount_triggered = 0;
 
 		Sample sample_previous = null;
 		try (SamplesFile samplesFile = new SamplesFile(samplesFileName)) {
 			while (samplesFile.hasNext()) {
 				Sample sample_current = samplesFile.nextSample();
+				samplesAmount_total++;
 
 				if (sample_current.hasTriggerTime()) {
 					long triggerTime = sample_current.getTriggerTime();
@@ -64,6 +67,8 @@ public class AnalyzeSamplesFile extends Feature {
 					} else if (triggerTime < triggerTime_shortest) {
 						triggerTime_shortest = triggerTime;
 					}
+					samplesAmount_triggered++;
+					triggerTime_average += triggerTime;
 				}
 
 				if (sample_previous != null) {
@@ -83,7 +88,7 @@ public class AnalyzeSamplesFile extends Feature {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		triggerTime_average = (triggerTime_longest + triggerTime_shortest) / 2;
+		triggerTime_average /= samplesAmount_triggered;
 		interval_left = triggerTime_shortest + signalTime;
 		interval_right = duration_shortest - triggerTime_longest - signalTime;
 
@@ -94,6 +99,8 @@ public class AnalyzeSamplesFile extends Feature {
 		data.setIntervalRight(interval_right);
 		data.setDurationMin(duration_shortest);
 		data.setDurationMax(duration_longest);
+		data.setSamplesAmountTotal(samplesAmount_total);
+		data.setSamplesAmountTriggered(samplesAmount_triggered);
 		notifyFeatureStatus(new FeatureStatus(FeatureStatus.COMPLETED));
 	}
 
@@ -119,5 +126,7 @@ public class AnalyzeSamplesFile extends Feature {
 		System.out.println("Trigger-time shortest: " + applicationData.getTriggerTimeMin());
 		System.out.println("Trigger-time longest : " + applicationData.getTriggerTimeMax());
 		System.out.println("Trigger-time average : " + applicationData.getTriggerTimeAverage());
+		System.out.println("Samples-amount total    : " + applicationData.getSamplesAmountTotal());
+		System.out.println("Samples-amount triggered: " + applicationData.getSamplesAmountTriggered());
 	}
 }
