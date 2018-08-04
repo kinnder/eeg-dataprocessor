@@ -30,6 +30,8 @@ public class PrepareSeparateTestFiles extends Feature {
 
 	final long duration_min;
 
+	final long indicationsFileTimeStep;
+
 	public PrepareSeparateTestFiles(ApplicationData data) {
 		indicationsFileName = data.getIndicationsFileName();
 		samplesFileName = data.getSamplesFileName();
@@ -39,6 +41,7 @@ public class PrepareSeparateTestFiles extends Feature {
 		interval_left = data.getIntervalLeft();
 		interval_right = data.getIntervalRight();
 		duration_min = data.getDurationMin();
+		indicationsFileTimeStep = data.getIndicationsFileTimeStep();
 	}
 
 	@Override
@@ -50,7 +53,7 @@ public class PrepareSeparateTestFiles extends Feature {
 		}
 
 		try (SamplesFile samplesFile = new SamplesFile(samplesFileName)) {
-			try (IndicationsFile indicationsFile = new IndicationsFile(indicationsFileName)) {
+			try (IndicationsFile indicationsFile = new IndicationsFile(indicationsFileName, indicationsFileTimeStep)) {
 				while (samplesFile.hasNext()) {
 					Sample sample = samplesFile.nextSample();
 					long intervalTime_begin = sample.getStartTime() + stimulusTime;
@@ -95,6 +98,7 @@ public class PrepareSeparateTestFiles extends Feature {
 		ApplicationData applicationData = new ApplicationData();
 		applicationData.setSamplesFileName("data//BNDmetki.txt");
 		applicationData.setIndicationsFileName("data//bnd.txt");
+		applicationData.setIndicationsFileTimeStep(IndicationsFile.timeStep_500HZ);
 		applicationData.setOutputFolder("data//bnd");
 
 		applicationData.setStimulusTime(300);

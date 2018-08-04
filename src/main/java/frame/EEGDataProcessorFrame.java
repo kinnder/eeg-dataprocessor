@@ -26,6 +26,7 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 	private final static int ROW_ID_INTERVAL_RIGHT = 2;
 	private final static int ROW_ID_DURATION_MIN = 3;
 	private final static int ROW_ID_TRIGGERTIME_AVERAGE = 4;
+	private final static int ROW_ID_TIMESTEP = 5;
 
 	public EEGDataProcessorFrame(ApplicationData applicationData) {
 		this();
@@ -36,6 +37,7 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 		model.setValueAt(applicationData.getIntervalRight(), ROW_ID_INTERVAL_RIGHT, 1);
 		model.setValueAt(applicationData.getDurationMin(), ROW_ID_DURATION_MIN, 1);
 		model.setValueAt(applicationData.getTriggerTimeAverage(), ROW_ID_TRIGGERTIME_AVERAGE, 1);
+		model.setValueAt(applicationData.getIndicationsFileTimeStep(), ROW_ID_TIMESTEP, 1);
 
 		model.addTableModelListener((TableModelEvent e) -> {
 			if (e.getType() == TableModelEvent.UPDATE) {
@@ -57,6 +59,9 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 					applicationData.setTriggerTimeAverage(
 							Long.parseLong((String) model.getValueAt(ROW_ID_TRIGGERTIME_AVERAGE, 1)));
 					break;
+				case ROW_ID_TIMESTEP:
+					applicationData
+							.setIndicationsFileTimeStep(Long.parseLong((String) model.getValueAt(ROW_ID_TIMESTEP, 1)));
 				}
 			}
 		});
@@ -97,7 +102,7 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 
 		jtParameters.setModel(new javax.swing.table.DefaultTableModel(
 				new Object[][] { { "stimulusTime", "" }, { "interval_left", null }, { "interval_right", null },
-						{ "duration_min", null }, { "triggerTime_average", null } },
+						{ "duration_min", null }, { "triggerTime_average", null }, { "timeStep", null } },
 				new String[] { "Параметр", "Значение" }) {
 			private static final long serialVersionUID = -7692149791349207355L;
 			Class<?>[] types = new Class[] { java.lang.String.class, java.lang.String.class };
@@ -173,9 +178,10 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 						.addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE));
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(layout.createSequentialGroup()
-						.addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107,
+						.addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 127,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(jScrollPane1)
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
 						.addContainerGap()));
 
 		pack();

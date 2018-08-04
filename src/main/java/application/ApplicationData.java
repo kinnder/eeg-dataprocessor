@@ -1,5 +1,7 @@
 package application;
 
+import domain.IndicationsFile;
+
 public class ApplicationData {
 
 	private String samplesFileName = "";
@@ -130,5 +132,15 @@ public class ApplicationData {
 
 	public long getSamplesAmountTriggered() {
 		return samplesAmount_triggered;
+	}
+
+	private long indicationsFileTimeStep = IndicationsFile.timeStep_500HZ;
+
+	public long getIndicationsFileTimeStep() {
+		return indicationsFileTimeStep;
+	}
+
+	public void setIndicationsFileTimeStep(long value) {
+		indicationsFileTimeStep = value;
 	}
 }
