@@ -20,7 +20,7 @@ public class PrepareSeparateTestFiles extends Feature {
 
 	final String folderName;
 
-	final long signalTime;
+	final long stimulusTime;
 
 	final long triggerTime_average;
 
@@ -34,7 +34,7 @@ public class PrepareSeparateTestFiles extends Feature {
 		indicationsFileName = data.getIndicationsFileName();
 		samplesFileName = data.getSamplesFileName();
 		folderName = data.getOutputFolder();
-		signalTime = data.getSignalTime();
+		stimulusTime = data.getStimulusTime();
 		triggerTime_average = data.getTriggerTimeAverage();
 		interval_left = data.getIntervalLeft();
 		interval_right = data.getIntervalRight();
@@ -53,7 +53,7 @@ public class PrepareSeparateTestFiles extends Feature {
 			try (IndicationsFile indicationsFile = new IndicationsFile(indicationsFileName)) {
 				while (samplesFile.hasNext()) {
 					Sample sample = samplesFile.nextSample();
-					long intervalTime_begin = sample.getStartTime() + signalTime;
+					long intervalTime_begin = sample.getStartTime() + stimulusTime;
 					if (sample.hasTriggerTime()) {
 						intervalTime_begin += sample.getTriggerTime();
 					} else {
@@ -97,7 +97,7 @@ public class PrepareSeparateTestFiles extends Feature {
 		applicationData.setIndicationsFileName("data//bnd.txt");
 		applicationData.setOutputFolder("data//bnd");
 
-		applicationData.setSignalTime(300);
+		applicationData.setStimulusTime(300);
 		applicationData.setTriggerTimeAverage(450);
 		applicationData.setIntervalLeft(204);
 		applicationData.setIntervalRight(396);

@@ -32,14 +32,14 @@ public class ApplicationData {
 		outputFolder = text;
 	}
 
-	private long signalTime = 300;
+	private long stimulusTime = 300;
 
-	public long getSignalTime() {
-		return signalTime;
+	public long getStimulusTime() {
+		return stimulusTime;
 	}
 
-	public void setSignalTime(long value) {
-		signalTime = value;
+	public void setStimulusTime(long value) {
+		stimulusTime = value;
 	}
 
 	private long triggerTime_average = 450;

@@ -21,7 +21,7 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 
 	private ApplicationData applicationData;
 
-	private final static int ROW_ID_SIGNAL = 0;
+	private final static int ROW_ID_STIMULUS = 0;
 	private final static int ROW_ID_INTERVAL_LEFT = 1;
 	private final static int ROW_ID_INTERVAL_RIGHT = 2;
 	private final static int ROW_ID_DURATION_MIN = 3;
@@ -31,7 +31,7 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 		this();
 		this.applicationData = applicationData;
 		TableModel model = jtParameters.getModel();
-		model.setValueAt(applicationData.getSignalTime(), ROW_ID_SIGNAL, 1);
+		model.setValueAt(applicationData.getStimulusTime(), ROW_ID_STIMULUS, 1);
 		model.setValueAt(applicationData.getIntervalLeft(), ROW_ID_INTERVAL_LEFT, 1);
 		model.setValueAt(applicationData.getIntervalRight(), ROW_ID_INTERVAL_RIGHT, 1);
 		model.setValueAt(applicationData.getDurationMin(), ROW_ID_DURATION_MIN, 1);
@@ -40,8 +40,8 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 		model.addTableModelListener((TableModelEvent e) -> {
 			if (e.getType() == TableModelEvent.UPDATE) {
 				switch (e.getFirstRow()) {
-				case ROW_ID_SIGNAL:
-					applicationData.setSignalTime(Long.parseLong((String) model.getValueAt(ROW_ID_SIGNAL, 1)));
+				case ROW_ID_STIMULUS:
+					applicationData.setStimulusTime(Long.parseLong((String) model.getValueAt(ROW_ID_STIMULUS, 1)));
 					break;
 				case ROW_ID_INTERVAL_LEFT:
 					applicationData.setIntervalLeft(Long.parseLong((String) model.getValueAt(ROW_ID_INTERVAL_LEFT, 1)));
@@ -96,7 +96,7 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 		jScrollPane1.setViewportView(jtaOutput);
 
 		jtParameters.setModel(new javax.swing.table.DefaultTableModel(
-				new Object[][] { { "signalTime", "" }, { "interval_left", null }, { "interval_right", null },
+				new Object[][] { { "stimulusTime", "" }, { "interval_left", null }, { "interval_right", null },
 						{ "duration_min", null }, { "triggerTime_average", null } },
 				new String[] { "Параметр", "Значение" }) {
 			private static final long serialVersionUID = -7692149791349207355L;

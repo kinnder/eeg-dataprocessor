@@ -16,7 +16,7 @@ public class AnalyzeSamplesFile extends Feature {
 
 	final String folderName;
 
-	final long signalTime;
+	final long stimulusTime;
 
 	final long triggerTime_average;
 
@@ -32,7 +32,7 @@ public class AnalyzeSamplesFile extends Feature {
 		indicationsFileName = data.getIndicationsFileName();
 		samplesFileName = data.getSamplesFileName();
 		folderName = data.getOutputFolder();
-		signalTime = data.getSignalTime();
+		stimulusTime = data.getStimulusTime();
 		triggerTime_average = data.getTriggerTimeAverage();
 		interval_left = data.getIntervalLeft();
 		interval_right = data.getIntervalRight();
@@ -89,8 +89,8 @@ public class AnalyzeSamplesFile extends Feature {
 			e.printStackTrace();
 		}
 		triggerTime_average /= samplesAmount_triggered;
-		interval_left = triggerTime_shortest + signalTime;
-		interval_right = duration_shortest - triggerTime_longest - signalTime;
+		interval_left = triggerTime_shortest + stimulusTime;
+		interval_right = duration_shortest - triggerTime_longest - stimulusTime;
 
 		data.setTriggerTimeMin(triggerTime_shortest);
 		data.setTriggerTimeMax(triggerTime_longest);
@@ -110,7 +110,7 @@ public class AnalyzeSamplesFile extends Feature {
 		applicationData.setIndicationsFileName("data//bnd.txt");
 		applicationData.setOutputFolder("data//bnd");
 
-		applicationData.setSignalTime(300);
+		applicationData.setStimulusTime(300);
 		applicationData.setTriggerTimeAverage(450);
 		applicationData.setIntervalLeft(204);
 		applicationData.setIntervalRight(396);
