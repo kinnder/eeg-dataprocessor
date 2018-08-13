@@ -16,8 +16,9 @@ public class IndicationsFile extends StringDataFileReader {
 
 	public static long timeStep_250HZ = 4;
 
-	public IndicationsFile(BufferedReader bufferedReader) {
+	public IndicationsFile(BufferedReader bufferedReader, long timeStep) {
 		super(bufferedReader);
+		this.timeStep = timeStep;
 	}
 
 	public IndicationsFile(String fileName, long timeStep) throws FileNotFoundException {

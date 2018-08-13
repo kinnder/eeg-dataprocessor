@@ -23,11 +23,13 @@ public class IndicationsFileTest {
 
 	BufferedReader bufferedReader_mock;
 
+	final long timeStep = 100;
+
 	@Before
 	public void setUp() {
 		bufferedReader_mock = context.mock(BufferedReader.class);
 
-		out = new IndicationsFile(bufferedReader_mock);
+		out = new IndicationsFile(bufferedReader_mock, timeStep);
 	}
 
 	@After
@@ -56,6 +58,6 @@ public class IndicationsFileTest {
 
 		i = out.nextIndication();
 		Assert.assertNotNull(i);
-		Assert.assertEquals(2, i.getTime());
+		Assert.assertEquals(0 + timeStep, i.getTime());
 	}
 }
