@@ -24,7 +24,6 @@ public class SelectFilesFrame extends javax.swing.JDialog {
 		jtfSamplesFile.setText(applicationData.getSamplesFileName());
 		jtfIndicationsFile.setText(applicationData.getIndicationsFileName());
 		jtfOutputFolder.setText(applicationData.getOutputFolder());
-		jfcSelectFile.setCurrentDirectory(new File("").getAbsoluteFile());
 	}
 
 	/**
@@ -35,7 +34,7 @@ public class SelectFilesFrame extends javax.swing.JDialog {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
-		jfcSelectFile = new javax.swing.JFileChooser();
+		jfcSelectFile = new javax.swing.JFileChooser(new File("").getAbsoluteFile());
 		jtfIndicationsFile = new javax.swing.JTextField();
 		jbSelectIndicationsFile = new javax.swing.JButton();
 		jbSelectSamplesFile = new javax.swing.JButton();

@@ -1,5 +1,6 @@
 package application;
 
+import parameter.Parameters;
 import domain.IndicationsFile;
 
 public class ApplicationData {
@@ -142,5 +143,25 @@ public class ApplicationData {
 
 	public void setIndicationsFileTimeStep(long value) {
 		indicationsFileTimeStep = value;
+	}
+
+	public Parameters getParameters() {
+		Parameters parameters = new Parameters();
+		parameters.setStimulusTime(stimulusTime);
+		parameters.setIntervalLeft(interval_left);
+		parameters.setIntervalRight(interval_right);
+		parameters.setDurationMin(duration_min);
+		parameters.setTriggerTimeAverage(triggerTime_average);
+		parameters.setIndicationsFileTimeStep(indicationsFileTimeStep);
+		return parameters;
+	}
+
+	public void setParameters(Parameters parameters) {
+		stimulusTime = parameters.getStimulusTime();
+		interval_left = parameters.getIntervalLeft();
+		interval_right = parameters.getIntervalRight();
+		duration_min = parameters.getDurationMin();
+		triggerTime_average = parameters.getTriggerTimeAverage();
+		indicationsFileTimeStep = parameters.getIndicationsFileTimeStep();
 	}
 }

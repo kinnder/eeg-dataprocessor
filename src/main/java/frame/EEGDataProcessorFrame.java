@@ -1,9 +1,12 @@
 package frame;
 
 import application.ApplicationData;
+import parameter.Parameters;
 import event.FeatureStatus;
 import feature.AnalyzeSamplesFile;
 import feature.PrepareSeparateTestFiles;
+import java.io.File;
+import javax.swing.JFileChooser;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.TableModel;
@@ -28,17 +31,22 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 	private final static int ROW_ID_TRIGGERTIME_AVERAGE = 4;
 	private final static int ROW_ID_TIMESTEP = 5;
 
+	private void showParameters() {
+		TableModel model = jtParameters.getModel();
+		model.setValueAt(Long.toString(applicationData.getStimulusTime()), ROW_ID_STIMULUS, 1);
+		model.setValueAt(Long.toString(applicationData.getIntervalLeft()), ROW_ID_INTERVAL_LEFT, 1);
+		model.setValueAt(Long.toString(applicationData.getIntervalRight()), ROW_ID_INTERVAL_RIGHT, 1);
+		model.setValueAt(Long.toString(applicationData.getDurationMin()), ROW_ID_DURATION_MIN, 1);
+		model.setValueAt(Long.toString(applicationData.getTriggerTimeAverage()), ROW_ID_TRIGGERTIME_AVERAGE, 1);
+		model.setValueAt(Long.toString(applicationData.getIndicationsFileTimeStep()), ROW_ID_TIMESTEP, 1);
+	}
+
 	public EEGDataProcessorFrame(ApplicationData applicationData) {
 		this();
 		this.applicationData = applicationData;
-		TableModel model = jtParameters.getModel();
-		model.setValueAt(applicationData.getStimulusTime(), ROW_ID_STIMULUS, 1);
-		model.setValueAt(applicationData.getIntervalLeft(), ROW_ID_INTERVAL_LEFT, 1);
-		model.setValueAt(applicationData.getIntervalRight(), ROW_ID_INTERVAL_RIGHT, 1);
-		model.setValueAt(applicationData.getDurationMin(), ROW_ID_DURATION_MIN, 1);
-		model.setValueAt(applicationData.getTriggerTimeAverage(), ROW_ID_TRIGGERTIME_AVERAGE, 1);
-		model.setValueAt(applicationData.getIndicationsFileTimeStep(), ROW_ID_TIMESTEP, 1);
+		showParameters();
 
+		TableModel model = jtParameters.getModel();
 		model.addTableModelListener((TableModelEvent e) -> {
 			if (e.getType() == TableModelEvent.UPDATE) {
 				switch (e.getFirstRow()) {
@@ -75,6 +83,7 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
+		jfcParametersFile = new javax.swing.JFileChooser(new File("").getAbsoluteFile());
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jtaOutput = new javax.swing.JTextArea();
 		jScrollPane2 = new javax.swing.JScrollPane();
@@ -84,8 +93,13 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 		jmiSelectFiles = new javax.swing.JMenuItem();
 		jSeparator1 = new javax.swing.JPopupMenu.Separator();
 		jmiExit = new javax.swing.JMenuItem();
-		jmTask = new javax.swing.JMenu();
+		jmParameters = new javax.swing.JMenu();
+		jmiParametersOpen = new javax.swing.JMenuItem();
+		jmiParametersSave = new javax.swing.JMenuItem();
+		jmiParametersSaveAs = new javax.swing.JMenuItem();
+		jSeparator2 = new javax.swing.JPopupMenu.Separator();
 		jmiAnalyzeSamplesFile = new javax.swing.JMenuItem();
+		jmTask = new javax.swing.JMenu();
 		jmiPrepareSeparateTestFiles = new javax.swing.JMenuItem();
 		jmHelp = new javax.swing.JMenu();
 		jmiHelp = new javax.swing.JMenuItem();
@@ -139,7 +153,33 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 
 		jmbMainMenu.add(jmFile);
 
-		jmTask.setText("Задача");
+		jmParameters.setText("Параметры");
+
+		jmiParametersOpen.setText("Открыть...");
+		jmiParametersOpen.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jmiParametersOpenActionPerformed(evt);
+			}
+		});
+		jmParameters.add(jmiParametersOpen);
+
+		jmiParametersSave.setText("Сохранить");
+		jmiParametersSave.setEnabled(false);
+		jmiParametersSave.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jmiParametersSaveActionPerformed(evt);
+			}
+		});
+		jmParameters.add(jmiParametersSave);
+
+		jmiParametersSaveAs.setText("Сохранить как...");
+		jmiParametersSaveAs.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jmiParametersSaveAsActionPerformed(evt);
+			}
+		});
+		jmParameters.add(jmiParametersSaveAs);
+		jmParameters.add(jSeparator2);
 
 		jmiAnalyzeSamplesFile.setText("Анализ файла меток");
 		jmiAnalyzeSamplesFile.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +187,11 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 				jmiAnalyzeSamplesFileActionPerformed(evt);
 			}
 		});
-		jmTask.add(jmiAnalyzeSamplesFile);
+		jmParameters.add(jmiAnalyzeSamplesFile);
+
+		jmbMainMenu.add(jmParameters);
+
+		jmTask.setText("Задача");
 
 		jmiPrepareSeparateTestFiles.setText("Подготовить файлы \"Отдельная проба\"");
 		jmiPrepareSeparateTestFiles.addActionListener(new java.awt.event.ActionListener() {
@@ -181,23 +225,51 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 						.addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 127,
 								javax.swing.GroupLayout.PREFERRED_SIZE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
+						.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
 						.addContainerGap()));
 
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
+
+	private void jmiParametersOpenActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmiParametersOpenActionPerformed
+		java.awt.EventQueue.invokeLater(() -> {
+			int result = jfcParametersFile.showOpenDialog(this);
+			if (result == JFileChooser.APPROVE_OPTION) {
+				File file = jfcParametersFile.getSelectedFile();
+				Parameters parameters = new Parameters();
+				parameters.load(file);
+				applicationData.setParameters(parameters);
+				showParameters();
+
+				jmiParametersSave.setEnabled(true);
+			}
+		});
+	}// GEN-LAST:event_jmiParametersOpenActionPerformed
+
+	private void jmiParametersSaveActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmiParametersSaveActionPerformed
+		java.awt.EventQueue.invokeLater(() -> {
+			File file = jfcParametersFile.getSelectedFile();
+			Parameters parameters = applicationData.getParameters();
+			parameters.save(file);
+		});
+	}// GEN-LAST:event_jmiParametersSaveActionPerformed
+
+	private void jmiParametersSaveAsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmiParametersSaveAsActionPerformed
+		java.awt.EventQueue.invokeLater(() -> {
+			int result = jfcParametersFile.showSaveDialog(this);
+			if (result == JFileChooser.APPROVE_OPTION) {
+				jmiParametersSaveActionPerformed(evt);
+				jmiParametersSave.setEnabled(true);
+			}
+		});
+	}// GEN-LAST:event_jmiParametersSaveAsActionPerformed
 
 	private void jmiAnalyzeSamplesFileActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmiAnalyzeSamplesFileActionPerformed
 		java.awt.EventQueue.invokeLater(() -> {
 			AnalyzeSamplesFile feature = new AnalyzeSamplesFile(applicationData);
 			feature.addFeatureStatusListener((FeatureStatus event) -> {
 				if (event.getType() == FeatureStatus.COMPLETED) {
-					TableModel model = jtParameters.getModel();
-					model.setValueAt(Long.toString(applicationData.getIntervalLeft()), ROW_ID_INTERVAL_LEFT, 1);
-					model.setValueAt(Long.toString(applicationData.getIntervalRight()), ROW_ID_INTERVAL_RIGHT, 1);
-					model.setValueAt(Long.toString(applicationData.getDurationMin()), ROW_ID_DURATION_MIN, 1);
-					model.setValueAt(Long.toString(applicationData.getTriggerTimeAverage()), ROW_ID_TRIGGERTIME_AVERAGE,
-							1);
+					showParameters();
 				}
 			});
 			new TaskProgressFrame(feature).setVisible(true);
@@ -225,14 +297,20 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JScrollPane jScrollPane2;
 	private javax.swing.JPopupMenu.Separator jSeparator1;
+	private javax.swing.JPopupMenu.Separator jSeparator2;
+	private javax.swing.JFileChooser jfcParametersFile;
 	private javax.swing.JMenu jmFile;
 	private javax.swing.JMenu jmHelp;
+	private javax.swing.JMenu jmParameters;
 	private javax.swing.JMenu jmTask;
 	private javax.swing.JMenuBar jmbMainMenu;
 	private javax.swing.JMenuItem jmiAbout;
 	private javax.swing.JMenuItem jmiAnalyzeSamplesFile;
 	private javax.swing.JMenuItem jmiExit;
 	private javax.swing.JMenuItem jmiHelp;
+	private javax.swing.JMenuItem jmiParametersOpen;
+	private javax.swing.JMenuItem jmiParametersSave;
+	private javax.swing.JMenuItem jmiParametersSaveAs;
 	private javax.swing.JMenuItem jmiPrepareSeparateTestFiles;
 	private javax.swing.JMenuItem jmiSelectFiles;
 	private javax.swing.JTable jtParameters;
