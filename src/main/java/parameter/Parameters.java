@@ -12,24 +12,33 @@ import org.jdom2.output.XMLOutputter;
 
 public class Parameters {
 
+	private final static String TAG_DATAPROCESSOR = "dataprocessor";
+	private final static String TAG_PARAMETERS = "parameters";
+	private final static String TAG_STIMULUS_TIME = "stimulusTime";
+	private final static String TAG_INTERVAL_LEFT = "interval_left";
+	private final static String TAG_INTERVAL_RIGHT = "interval_right";
+	private final static String TAG_TRIGGER_TIME_AVERAGE = "triggerTime_average";
+	private final static String TAG_DURATION_MIN = "duration_min";
+	private final static String TAG_INDICATIONS_FILE_TIME_STEP = "indicationsFileTimeStep";
+
 	public Parameters() {
 	}
 
 	public void save(File file) {
 		Document xmlDoc = new Document();
 
-		Element root = new Element("dataprocessor");
+		Element root = new Element(TAG_DATAPROCESSOR);
 		xmlDoc.setRootElement(root);
 
-		Element parameters = new Element("parameters");
+		Element parameters = new Element(TAG_PARAMETERS);
 		root.addContent(parameters);
 
-		parameters.addContent(new Element("stimulusTime").addContent(Long.toString(stimulusTime)));
-		parameters.addContent(new Element("interval_left").addContent(Long.toString(interval_left)));
-		parameters.addContent(new Element("interval_right").addContent(Long.toString(interval_right)));
-		parameters.addContent(new Element("triggerTime_average").addContent(Long.toString(triggerTime_average)));
-		parameters.addContent(new Element("duration_min").addContent(Long.toString(duration_min)));
-		parameters.addContent(new Element("indicationsFileTimeStep").addContent(Long.toString(indicationsFileTimeStep)));
+		parameters.addContent(new Element(TAG_STIMULUS_TIME).addContent(Long.toString(stimulusTime)));
+		parameters.addContent(new Element(TAG_INTERVAL_LEFT).addContent(Long.toString(interval_left)));
+		parameters.addContent(new Element(TAG_INTERVAL_RIGHT).addContent(Long.toString(interval_right)));
+		parameters.addContent(new Element(TAG_TRIGGER_TIME_AVERAGE).addContent(Long.toString(triggerTime_average)));
+		parameters.addContent(new Element(TAG_DURATION_MIN).addContent(Long.toString(duration_min)));
+		parameters.addContent(new Element(TAG_INDICATIONS_FILE_TIME_STEP).addContent(Long.toString(indicationsFileTimeStep)));
 
 		try {
 			Format fmt = Format.getPrettyFormat();
@@ -49,14 +58,14 @@ public class Parameters {
 
 			Element root = xmlDoc.getRootElement();
 
-			Element parameters = root.getChild("parameters");
+			Element parameters = root.getChild(TAG_PARAMETERS);
 
-			stimulusTime = Long.parseLong(parameters.getChildText("stimulusTime"));
-			interval_left = Long.parseLong(parameters.getChildText("interval_left"));
-			interval_right = Long.parseLong(parameters.getChildText("interval_right"));
-			triggerTime_average = Long.parseLong(parameters.getChildText("triggerTime_average"));
-			duration_min = Long.parseLong(parameters.getChildText("duration_min"));
-			indicationsFileTimeStep = Long.parseLong(parameters.getChildText("indicationsFileTimeStep"));
+			stimulusTime = Long.parseLong(parameters.getChildText(TAG_STIMULUS_TIME));
+			interval_left = Long.parseLong(parameters.getChildText(TAG_INTERVAL_LEFT));
+			interval_right = Long.parseLong(parameters.getChildText(TAG_INTERVAL_RIGHT));
+			triggerTime_average = Long.parseLong(parameters.getChildText(TAG_TRIGGER_TIME_AVERAGE));
+			duration_min = Long.parseLong(parameters.getChildText(TAG_DURATION_MIN));
+			indicationsFileTimeStep = Long.parseLong(parameters.getChildText(TAG_INDICATIONS_FILE_TIME_STEP));
 
 		} catch (JDOMException e) {
 			e.printStackTrace();
