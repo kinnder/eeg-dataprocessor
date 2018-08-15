@@ -12,8 +12,8 @@ public class ApplicationData {
 		applicationData.setOutputFolder("data//bnd");
 		applicationData.setStimulusTime(300);
 		applicationData.setTriggerTimeAverage(450);
-		applicationData.setIntervalLeft(204);
-		applicationData.setIntervalRight(396);
+		applicationData.setIntervalLeft(504);
+		applicationData.setIntervalRight(988);
 		applicationData.setDurationMin(1984);
 		return applicationData;
 	}

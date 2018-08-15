@@ -81,12 +81,20 @@
             <Property name="text" type="java.lang.String" value="&#x417;&#x430;&#x434;&#x430;&#x447;&#x430;"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiPrepareSeparateTestFiles">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiPrepareSingleTestFiles">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x434;&#x433;&#x43e;&#x442;&#x43e;&#x432;&#x438;&#x442;&#x44c; &#x444;&#x430;&#x439;&#x43b;&#x44b; &quot;&#x41e;&#x442;&#x434;&#x435;&#x43b;&#x44c;&#x43d;&#x430;&#x44f; &#x43f;&#x440;&#x43e;&#x431;&#x430;&quot;"/>
+                <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x434;&#x433;&#x43e;&#x442;&#x43e;&#x432;&#x438;&#x442;&#x44c; &#x444;&#x430;&#x439;&#x43b;&#x44b; &quot;&#x41f;&#x440;&#x43e;&#x431;&#x430;&quot;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPrepareSeparateTestFilesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPrepareSingleTestFilesActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiPrepareSingleLabelFiles">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x41f;&#x43e;&#x434;&#x433;&#x43e;&#x442;&#x43e;&#x432;&#x438;&#x442;&#x44c; &#x444;&#x430;&#x439;&#x43b;&#x44b; &quot;&#x41c;&#x435;&#x442;&#x43a;&#x430;&quot;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPrepareSingleLabelFilesActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
