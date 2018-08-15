@@ -58,7 +58,7 @@ public class ApplicationData {
 		stimulusTime = value;
 	}
 
-	private long triggerTime_average = 450;
+	private long triggerTime_average;
 
 	public long getTriggerTimeAverage() {
 		return triggerTime_average;
@@ -88,7 +88,7 @@ public class ApplicationData {
 		return triggerTime_max;
 	}
 
-	private long interval_left = 204;
+	private long interval_left;
 
 	public long getIntervalLeft() {
 		return interval_left;
@@ -98,7 +98,7 @@ public class ApplicationData {
 		interval_left = value;
 	}
 
-	private long interval_right = 396;
+	private long interval_right;
 
 	public long getIntervalRight() {
 		return interval_right;
@@ -108,7 +108,7 @@ public class ApplicationData {
 		interval_right = value;
 	}
 
-	private long duration_min = 1984;
+	private long duration_min;
 
 	public long getDurationMin() {
 		return duration_min;
