@@ -1,9 +1,22 @@
 package application;
 
-import parameter.Parameters;
 import domain.IndicationsFile;
 
 public class ApplicationData {
+
+	public static ApplicationData createDefault() {
+		ApplicationData applicationData = new ApplicationData();
+		applicationData.setSamplesFileName("data//BNDmetki.txt");
+		applicationData.setIndicationsFileName("data//bnd.txt");
+		applicationData.setIndicationsFileTimeStep(IndicationsFile.timeStep_500HZ);
+		applicationData.setOutputFolder("data//bnd");
+		applicationData.setStimulusTime(300);
+		applicationData.setTriggerTimeAverage(450);
+		applicationData.setIntervalLeft(204);
+		applicationData.setIntervalRight(396);
+		applicationData.setDurationMin(1984);
+		return applicationData;
+	}
 
 	private String samplesFileName = "";
 

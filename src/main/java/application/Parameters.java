@@ -1,4 +1,4 @@
-package parameter;
+package application;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,7 +38,8 @@ public class Parameters {
 		parameters.addContent(new Element(TAG_INTERVAL_RIGHT).addContent(Long.toString(interval_right)));
 		parameters.addContent(new Element(TAG_TRIGGER_TIME_AVERAGE).addContent(Long.toString(triggerTime_average)));
 		parameters.addContent(new Element(TAG_DURATION_MIN).addContent(Long.toString(duration_min)));
-		parameters.addContent(new Element(TAG_INDICATIONS_FILE_TIME_STEP).addContent(Long.toString(indicationsFileTimeStep)));
+		parameters.addContent(
+				new Element(TAG_INDICATIONS_FILE_TIME_STEP).addContent(Long.toString(indicationsFileTimeStep)));
 
 		try {
 			Format fmt = Format.getPrettyFormat();

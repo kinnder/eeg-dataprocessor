@@ -9,44 +9,28 @@ import domain.Indication;
 import domain.IndicationsFile;
 import domain.Sample;
 import domain.SamplesFile;
-import event.FeatureStatus;
 import utility.StringDataFileWriter;
 
-public class PrepareSeparateTestFiles extends Feature {
+public class PrepareSingleTestFiles extends Feature {
 
-	final String indicationsFileName;
-
-	final String samplesFileName;
-
-	final String folderName;
-
-	final long stimulusTime;
-
-	final long triggerTime_average;
-
-	final long interval_left;
-
-	final long interval_right;
-
-	final long duration_min;
-
-	final long indicationsFileTimeStep;
-
-	public PrepareSeparateTestFiles(ApplicationData data) {
-		indicationsFileName = data.getIndicationsFileName();
-		samplesFileName = data.getSamplesFileName();
-		folderName = data.getOutputFolder();
-		stimulusTime = data.getStimulusTime();
-		triggerTime_average = data.getTriggerTimeAverage();
-		interval_left = data.getIntervalLeft();
-		interval_right = data.getIntervalRight();
-		duration_min = data.getDurationMin();
-		indicationsFileTimeStep = data.getIndicationsFileTimeStep();
+	public PrepareSingleTestFiles(ApplicationData applicationData) {
+		super(applicationData);
 	}
 
 	@Override
 	public void run() {
-		notifyFeatureStatus(new FeatureStatus(FeatureStatus.STARTED));
+		notifyFeatureStarted();
+
+		String indicationsFileName = applicationData.getIndicationsFileName();
+		String samplesFileName = applicationData.getSamplesFileName();
+		String folderName = applicationData.getOutputFolder();
+		long stimulusTime = applicationData.getStimulusTime();
+		long triggerTime_average = applicationData.getTriggerTimeAverage();
+		long interval_left = applicationData.getIntervalLeft();
+		long interval_right = applicationData.getIntervalRight();
+		long duration_min = applicationData.getDurationMin();
+		long indicationsFileTimeStep = applicationData.getIndicationsFileTimeStep();
+
 		File folder = new File(folderName);
 		if (!folder.exists()) {
 			folder.mkdir();
@@ -83,7 +67,8 @@ public class PrepareSeparateTestFiles extends Feature {
 							}
 						}
 					}
-					notifyFeatureStatus(new FeatureStatus(FeatureStatus.UPDATED));
+
+					notifyFeatureUpdated();
 				}
 			}
 		} catch (FileNotFoundException e) {
@@ -91,23 +76,13 @@ public class PrepareSeparateTestFiles extends Feature {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		notifyFeatureStatus(new FeatureStatus(FeatureStatus.COMPLETED));
+
+		notifyFeatureCompleted();
 	}
 
 	public static void main(String args[]) {
-		ApplicationData applicationData = new ApplicationData();
-		applicationData.setSamplesFileName("data//BNDmetki.txt");
-		applicationData.setIndicationsFileName("data//bnd.txt");
-		applicationData.setIndicationsFileTimeStep(IndicationsFile.timeStep_500HZ);
-		applicationData.setOutputFolder("data//bnd");
-
-		applicationData.setStimulusTime(300);
-		applicationData.setTriggerTimeAverage(450);
-		applicationData.setIntervalLeft(204);
-		applicationData.setIntervalRight(396);
-		applicationData.setDurationMin(1984);
-
-		PrepareSeparateTestFiles feature = new PrepareSeparateTestFiles(applicationData);
+		ApplicationData applicationData = ApplicationData.createDefault();
+		PrepareSingleTestFiles feature = new PrepareSingleTestFiles(applicationData);
 		feature.run();
 	}
 }

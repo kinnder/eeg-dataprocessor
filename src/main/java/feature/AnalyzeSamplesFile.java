@@ -6,43 +6,19 @@ import java.io.IOException;
 import application.ApplicationData;
 import domain.Sample;
 import domain.SamplesFile;
-import event.FeatureStatus;
 
 public class AnalyzeSamplesFile extends Feature {
 
-	final String indicationsFileName;
-
-	final String samplesFileName;
-
-	final String folderName;
-
-	final long stimulusTime;
-
-	final long triggerTime_average;
-
-	final long interval_left;
-
-	final long interval_right;
-
-	final long duration_min;
-
-	private ApplicationData data;
-
-	public AnalyzeSamplesFile(ApplicationData data) {
-		indicationsFileName = data.getIndicationsFileName();
-		samplesFileName = data.getSamplesFileName();
-		folderName = data.getOutputFolder();
-		stimulusTime = data.getStimulusTime();
-		triggerTime_average = data.getTriggerTimeAverage();
-		interval_left = data.getIntervalLeft();
-		interval_right = data.getIntervalRight();
-		duration_min = data.getDurationMin();
-		this.data = data;
+	public AnalyzeSamplesFile(ApplicationData applicationData) {
+		super(applicationData);
 	}
 
 	@Override
 	public void run() {
-		notifyFeatureStatus(new FeatureStatus(FeatureStatus.STARTED));
+		notifyFeatureStarted();
+
+		String samplesFileName = applicationData.getSamplesFileName();
+		long stimulusTime = applicationData.getStimulusTime();
 
 		long duration_longest = Long.MIN_VALUE;
 		long duration_shortest = Long.MAX_VALUE;
@@ -79,9 +55,9 @@ public class AnalyzeSamplesFile extends Feature {
 						duration_shortest = duration;
 					}
 				}
-
 				sample_previous = sample_current;
-				notifyFeatureStatus(new FeatureStatus(FeatureStatus.UPDATED));
+
+				notifyFeatureUpdated();
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -92,30 +68,21 @@ public class AnalyzeSamplesFile extends Feature {
 		interval_left = triggerTime_shortest + stimulusTime;
 		interval_right = duration_shortest - triggerTime_longest - stimulusTime;
 
-		data.setTriggerTimeMin(triggerTime_shortest);
-		data.setTriggerTimeMax(triggerTime_longest);
-		data.setTriggerTimeAverage(triggerTime_average);
-		data.setIntervalLeft(interval_left);
-		data.setIntervalRight(interval_right);
-		data.setDurationMin(duration_shortest);
-		data.setDurationMax(duration_longest);
-		data.setSamplesAmountTotal(samplesAmount_total);
-		data.setSamplesAmountTriggered(samplesAmount_triggered);
-		notifyFeatureStatus(new FeatureStatus(FeatureStatus.COMPLETED));
+		applicationData.setTriggerTimeMin(triggerTime_shortest);
+		applicationData.setTriggerTimeMax(triggerTime_longest);
+		applicationData.setTriggerTimeAverage(triggerTime_average);
+		applicationData.setIntervalLeft(interval_left);
+		applicationData.setIntervalRight(interval_right);
+		applicationData.setDurationMin(duration_shortest);
+		applicationData.setDurationMax(duration_longest);
+		applicationData.setSamplesAmountTotal(samplesAmount_total);
+		applicationData.setSamplesAmountTriggered(samplesAmount_triggered);
+
+		notifyFeatureCompleted();
 	}
 
 	public static void main(String args[]) {
-		ApplicationData applicationData = new ApplicationData();
-		applicationData.setSamplesFileName("data//BNDmetki.txt");
-		applicationData.setIndicationsFileName("data//bnd.txt");
-		applicationData.setOutputFolder("data//bnd");
-
-		applicationData.setStimulusTime(300);
-		applicationData.setTriggerTimeAverage(450);
-		applicationData.setIntervalLeft(204);
-		applicationData.setIntervalRight(396);
-		applicationData.setDurationMin(1984);
-
+		ApplicationData applicationData = ApplicationData.createDefault();
 		AnalyzeSamplesFile feature = new AnalyzeSamplesFile(applicationData);
 		feature.run();
 

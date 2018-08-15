@@ -1,10 +1,11 @@
 package frame;
 
 import application.ApplicationData;
-import parameter.Parameters;
-import event.FeatureStatus;
+import application.Parameters;
 import feature.AnalyzeSamplesFile;
-import feature.PrepareSeparateTestFiles;
+import feature.FeatureStatus;
+import feature.PrepareSingleTestFiles;
+
 import java.io.File;
 import javax.swing.JFileChooser;
 
@@ -288,7 +289,7 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 
 	private void jmiPrepareSeparateTestFilesActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jmiPrepareSeparateTestFilesActionPerformed
 		java.awt.EventQueue.invokeLater(() -> {
-			PrepareSeparateTestFiles feature = new PrepareSeparateTestFiles(applicationData);
+			PrepareSingleTestFiles feature = new PrepareSingleTestFiles(applicationData);
 			new TaskProgressFrame(feature).setVisible(true);
 		});
 	}// GEN-LAST:event_jmiPrepareSeparateTestFilesActionPerformed

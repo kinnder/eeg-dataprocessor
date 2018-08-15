@@ -1,4 +1,4 @@
-package event;
+package feature;
 
 public interface FeatureStatusListener {
 

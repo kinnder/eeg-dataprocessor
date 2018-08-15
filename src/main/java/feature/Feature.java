@@ -3,8 +3,7 @@ package feature;
 import java.util.ArrayList;
 import java.util.List;
 
-import event.FeatureStatus;
-import event.FeatureStatusListener;
+import application.ApplicationData;
 
 public class Feature implements Runnable {
 
@@ -26,7 +25,25 @@ public class Feature implements Runnable {
 		}
 	}
 
+	protected ApplicationData applicationData;
+
+	public Feature(ApplicationData applicationData) {
+		this.applicationData = applicationData;
+	}
+
 	@Override
 	public void run() {
+	}
+
+	public void notifyFeatureStarted() {
+		notifyFeatureStatus(new FeatureStatus(FeatureStatus.STARTED));
+	}
+
+	public void notifyFeatureUpdated() {
+		notifyFeatureStatus(new FeatureStatus(FeatureStatus.UPDATED));
+	}
+
+	public void notifyFeatureCompleted() {
+		notifyFeatureStatus(new FeatureStatus(FeatureStatus.COMPLETED));
 	}
 }

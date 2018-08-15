@@ -2,9 +2,9 @@ package frame;
 
 import java.awt.EventQueue;
 
-import event.FeatureStatus;
-import event.FeatureStatusListener;
 import feature.Feature;
+import feature.FeatureStatus;
+import feature.FeatureStatusListener;
 
 public class TaskProgressFrame extends javax.swing.JDialog implements FeatureStatusListener {
 
