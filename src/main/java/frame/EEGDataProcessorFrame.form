@@ -97,6 +97,22 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPrepareSingleLabelFilesActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiPrepareTestInOneRowFile">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x420;&#x430;&#x437;&#x43c;&#x435;&#x441;&#x442;&#x438;&#x442;&#x44c; &#x43f;&#x440;&#x43e;&#x431;&#x44b; &#x432; &#x441;&#x442;&#x440;&#x43e;&#x43a;&#x443;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPrepareTestInOneRowFileActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiPrepareChannelInOneRowFile">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x420;&#x430;&#x437;&#x43c;&#x435;&#x441;&#x442;&#x438;&#x442;&#x44c; &#x43a;&#x430;&#x43d;&#x430;&#x43b;&#x44b; &#x432; &#x441;&#x442;&#x440;&#x43e;&#x43a;&#x443;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPrepareChannelInOneRowFileActionPerformed"/>
+              </Events>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jmHelp">

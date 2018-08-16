@@ -5,8 +5,10 @@ import application.Parameters;
 import feature.AnalyzeSamplesFile;
 import feature.Feature;
 import feature.FeatureStatus;
+import feature.PrepareChannelInOneRowFile;
 import feature.PrepareSingleLabelFiles;
 import feature.PrepareSingleTestFiles;
+import feature.PrepareTestInOneRowFile;
 
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -105,6 +107,8 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 		jmTask = new javax.swing.JMenu();
 		jmiPrepareSingleTestFiles = new javax.swing.JMenuItem();
 		jmiPrepareSingleLabelFiles = new javax.swing.JMenuItem();
+		jmiPrepareTestInOneRowFile = new javax.swing.JMenuItem();
+		jmiPrepareChannelInOneRowFile = new javax.swing.JMenuItem();
 		jmHelp = new javax.swing.JMenu();
 		jmiHelp = new javax.swing.JMenuItem();
 		jmiAbout = new javax.swing.JMenuItem();
@@ -213,6 +217,22 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 		});
 		jmTask.add(jmiPrepareSingleLabelFiles);
 
+		jmiPrepareTestInOneRowFile.setText("Разместить пробы в строку");
+		jmiPrepareTestInOneRowFile.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jmiPrepareTestInOneRowFileActionPerformed(evt);
+			}
+		});
+		jmTask.add(jmiPrepareTestInOneRowFile);
+
+		jmiPrepareChannelInOneRowFile.setText("Разместить каналы в строку");
+		jmiPrepareChannelInOneRowFile.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jmiPrepareChannelInOneRowFileActionPerformed(evt);
+			}
+		});
+		jmTask.add(jmiPrepareChannelInOneRowFile);
+
 		jmbMainMenu.add(jmTask);
 
 		jmHelp.setText("?");
@@ -312,6 +332,20 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 		});
 	}//GEN-LAST:event_jmiPrepareSeparateTestFilesActionPerformed
 
+	private void jmiPrepareTestInOneRowFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPrepareTestInOneRowFileActionPerformed
+		java.awt.EventQueue.invokeLater(() -> {
+			Feature feature = new PrepareTestInOneRowFile(applicationData);
+			new TaskProgressFrame(feature).setVisible(true);
+		});
+	}//GEN-LAST:event_jmiPrepareTestInOneRowFileActionPerformed
+
+	private void jmiPrepareChannelInOneRowFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPrepareChannelInOneRowFileActionPerformed
+		java.awt.EventQueue.invokeLater(() -> {
+			Feature feature = new PrepareChannelInOneRowFile(applicationData);
+			new TaskProgressFrame(feature).setVisible(true);
+		});
+	}//GEN-LAST:event_jmiPrepareChannelInOneRowFileActionPerformed
+
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JScrollPane jScrollPane2;
@@ -330,8 +364,10 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 	private javax.swing.JMenuItem jmiParametersOpen;
 	private javax.swing.JMenuItem jmiParametersSave;
 	private javax.swing.JMenuItem jmiParametersSaveAs;
+	private javax.swing.JMenuItem jmiPrepareChannelInOneRowFile;
 	private javax.swing.JMenuItem jmiPrepareSingleLabelFiles;
 	private javax.swing.JMenuItem jmiPrepareSingleTestFiles;
+	private javax.swing.JMenuItem jmiPrepareTestInOneRowFile;
 	private javax.swing.JMenuItem jmiSelectFiles;
 	private javax.swing.JTable jtParameters;
 	private javax.swing.JTextArea jtaOutput;

@@ -83,7 +83,7 @@ public class AnalyzeSamplesFile extends Feature {
 
 	public static void main(String args[]) {
 		ApplicationData applicationData = ApplicationData.createDefault();
-		AnalyzeSamplesFile feature = new AnalyzeSamplesFile(applicationData);
+		Feature feature = new AnalyzeSamplesFile(applicationData);
 		feature.run();
 
 		System.out.println("Duration-shortest: " + applicationData.getDurationMin());

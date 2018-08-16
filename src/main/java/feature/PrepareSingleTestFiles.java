@@ -82,7 +82,7 @@ public class PrepareSingleTestFiles extends Feature {
 
 	public static void main(String args[]) {
 		ApplicationData applicationData = ApplicationData.createDefault();
-		PrepareSingleTestFiles feature = new PrepareSingleTestFiles(applicationData);
+		Feature feature = new PrepareSingleTestFiles(applicationData);
 		feature.run();
 	}
 }

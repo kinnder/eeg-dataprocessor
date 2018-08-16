@@ -104,7 +104,7 @@ public class PrepareSingleLabelFiles extends Feature {
 
 	public static void main(String args[]) {
 		ApplicationData applicationData = ApplicationData.createDefault();
-		PrepareSingleLabelFiles feature = new PrepareSingleLabelFiles(applicationData);
+		Feature feature = new PrepareSingleLabelFiles(applicationData);
 		feature.run();
 	}
 }
