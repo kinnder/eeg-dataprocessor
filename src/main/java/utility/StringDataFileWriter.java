@@ -27,4 +27,12 @@ public class StringDataFileWriter implements Closeable {
 		bufferedWriter.write(data);
 		bufferedWriter.newLine();
 	}
+
+	public void write(String data) throws IOException {
+		bufferedWriter.write(data);
+	}
+
+	public void newLine() throws IOException {
+		bufferedWriter.newLine();
+	}
 }

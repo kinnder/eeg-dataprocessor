@@ -16,6 +16,14 @@ public class Indication {
 		this.dataAsString = data;
 	}
 
+	public Indication(long time, String data) {
+		this(data);
+		this.time = time;
+	}
+
+	public Indication() {
+	}
+
 	public String toString() {
 		return dataAsString;
 	}
@@ -26,11 +34,6 @@ public class Indication {
 		return time;
 	}
 
-	public Indication(long time, String data) {
-		this(data);
-		this.time = time;
-	}
-
 	private String[] splitString(String data) {
 		return data.trim().split("\\s+");
 	}
@@ -39,6 +42,7 @@ public class Indication {
 		return splitString(data).length;
 	}
 
+	@Deprecated
 	public Indication construct(String data) {
 		String[] split = splitString(data);
 		int length = split.length;
@@ -49,12 +53,42 @@ public class Indication {
 		return new Indication(doubles);
 	}
 
+	private void parseData() {
+		String[] split = splitString(dataAsString);
+		int length = split.length;
+		data = new double[length];
+		for (int i = 0; i < length; i++) {
+			data[i] = Double.parseDouble(split[i]);
+		}
+	}
+
 	public int getChannels() {
+		if (data == null && dataAsString != null) {
+			parseData();
+		}
+		if (data != null) {
+			return data.length;
+		}
 		return 0;
 	}
 
 	public double[] getData() {
-		// TODO Auto-generated method stub
+		if (data == null && dataAsString != null) {
+			parseData();
+		}
+		if (data != null) {
+			return data;
+		}
 		return null;
+	}
+
+	public double getChannel(int j) {
+		if (data == null && dataAsString != null) {
+			parseData();
+		}
+		if (data != null) {
+			return data[j];
+		}
+		return 0;
 	}
 }
