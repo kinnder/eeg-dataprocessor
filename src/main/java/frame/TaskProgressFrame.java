@@ -89,6 +89,7 @@ public class TaskProgressFrame extends javax.swing.JDialog implements FeatureSta
 		switch (event.getType()) {
 		case FeatureStatus.STARTED:
 			jpbProgress.setValue(0);
+			jpbProgress.setIndeterminate(true);
 			break;
 		case FeatureStatus.UPDATED:
 			break;
