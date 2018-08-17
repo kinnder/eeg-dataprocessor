@@ -243,6 +243,11 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 		jmHelp.add(jmiHelp);
 
 		jmiAbout.setText("О программе...");
+		jmiAbout.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jmiAboutActionPerformed(evt);
+			}
+		});
 		jmHelp.add(jmiAbout);
 
 		jmbMainMenu.add(jmHelp);
@@ -353,6 +358,12 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 			new HelpFrame().setVisible(true);
 		});
 	}//GEN-LAST:event_jmiHelpActionPerformed
+
+	private void jmiAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAboutActionPerformed
+		java.awt.EventQueue.invokeLater(() -> {
+			new AboutFrame().setVisible(true);
+		});
+	}//GEN-LAST:event_jmiAboutActionPerformed
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JScrollPane jScrollPane1;
