@@ -20,9 +20,6 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 
 	private static final long serialVersionUID = -5065287789826423012L;
 
-	/**
-	 * Creates new form EEGDataProcessorFrame
-	 */
 	public EEGDataProcessorFrame() {
 		initComponents();
 	}
@@ -238,6 +235,11 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 		jmHelp.setText("?");
 
 		jmiHelp.setText("Справка");
+		jmiHelp.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				jmiHelpActionPerformed(evt);
+			}
+		});
 		jmHelp.add(jmiHelp);
 
 		jmiAbout.setText("О программе...");
@@ -345,6 +347,12 @@ public class EEGDataProcessorFrame extends javax.swing.JFrame {
 			new TaskProgressFrame(feature).setVisible(true);
 		});
 	}//GEN-LAST:event_jmiPrepareChannelInOneRowFileActionPerformed
+
+	private void jmiHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiHelpActionPerformed
+		java.awt.EventQueue.invokeLater(() -> {
+			new HelpFrame().setVisible(true);
+		});
+	}//GEN-LAST:event_jmiHelpActionPerformed
 
 	// Variables declaration - do not modify//GEN-BEGIN:variables
 	private javax.swing.JScrollPane jScrollPane1;
