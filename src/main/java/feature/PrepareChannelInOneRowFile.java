@@ -77,7 +77,7 @@ public class PrepareChannelInOneRowFile extends Feature {
 					for (int j = 0; j < channelsAmount; j++) {
 						for (int i = 0; i < indicationsAmount; i++) {
 							double value = indication[i].getChannel(j);
-							testFile.write(String.format(Locale.US, " %9.2f", value));
+							testFile.write(String.format(Locale.US, "% 9.02f ", value));
 						}
 						testFile.newLine();
 					}

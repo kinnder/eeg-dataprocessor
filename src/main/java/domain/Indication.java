@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Locale;
+
 public class Indication {
 
 	final static long NO_TIME = -1;
@@ -25,6 +27,15 @@ public class Indication {
 	}
 
 	public String toString() {
+		if (dataAsString != null) {
+			return dataAsString;
+		}
+		dataAsString = "";
+		if (data != null) {
+			for (double value : data) {
+				dataAsString += String.format(Locale.US, "% 9.02f ", value);
+			}
+		}
 		return dataAsString;
 	}
 
@@ -36,21 +47,6 @@ public class Indication {
 
 	private String[] splitString(String data) {
 		return data.trim().split("\\s+");
-	}
-
-	public int getChannels(String data) {
-		return splitString(data).length;
-	}
-
-	@Deprecated
-	public Indication construct(String data) {
-		String[] split = splitString(data);
-		int length = split.length;
-		double[] doubles = new double[length];
-		for (int i = 0; i < length; i++) {
-			doubles[i] = Double.parseDouble(split[i]);
-		}
-		return new Indication(doubles);
 	}
 
 	private void parseData() {
@@ -82,12 +78,12 @@ public class Indication {
 		return null;
 	}
 
-	public double getChannel(int j) {
+	public double getChannel(int idx) {
 		if (data == null && dataAsString != null) {
 			parseData();
 		}
 		if (data != null) {
-			return data[j];
+			return data[idx];
 		}
 		return 0;
 	}
